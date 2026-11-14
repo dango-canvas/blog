@@ -1,0 +1,106 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About | Dango Blog</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍡</text></svg>">
+    
+    <!-- 关键 CSS 内联，防止白屏闪烁 (FOUC) -->
+    <style>
+        :root {
+            --bg-color: #f4f7f6;
+            --text-color: #343a40;
+        }
+        body {
+              background-color: var(--bg-color);
+              color: var(--text-color);
+              margin: 0;
+              padding: 0;
+              /* 初始隐藏，配合 CSS 动画平滑显示 */
+              opacity: 0;
+              animation: fadeIn 0.4s ease-out forwards;
+          }
+          @keyframes fadeIn {
+              from { opacity: 0; transform: translateY(10px); }
+              to { opacity: 1; transform: translateY(0); }
+          }
+         .container {
+             max-width: 840px;
+             margin: 0 auto;
+         }
+     </style>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="rss.xml">
+    
+    
+
+    
+</head>
+<body>
+    <div class="container">
+        <header class="site-header">
+            <a href="en.html" class="site-title"><span class="site-logo-icon">🍡</span><span class="site-logo-text">Dango Blog</span></a>
+            
+<nav>
+    <a href="en.html">Home</a>
+    <a href="archive-en.html">Archive</a>
+    <a href="about-en.html">About</a>
+    <a href="about.html" class="lang-switch-btn" onclick="try{localStorage.setItem('dango_blog_lang','zh')}catch(e){}">中文</a>
+</nav>
+        </header>
+        <main>
+
+<div class="card about-page">
+    
+        <h2>About this Blog</h2>
+        <p>Welcome to Dango Blog!</p>
+        <p>Development logs of Dango Canvas and thoughts on visual thinking.</p>
+        
+        <hr>
+        
+        <div class="author-section">
+            <img src="https://avatars.githubusercontent.com/u/67679830" alt="plasma-blue" class="author-avatar">
+            <div class="author-info">
+                <h3>About the Author</h3>
+                <p>I am <strong>plasma-blue</strong>. I enjoy deconstructing complex systems and crafting new clarity from them. Currently, I am focused on the development and iteration of <strong>Dango Canvas (团子画板)</strong>.</p>
+                <p>Besides programming, I have recently been practicing juggling, seeking dynamic balance in the physical world as well.</p>
+            </div>
+        </div>
+
+        <div class="submission-box">
+            <h4>🎨 Submissions Welcome</h4>
+            <p>If you've created interesting works or structured thoughts using Dango Canvas, you are warmly invited to submit them to this blog!</p>
+        </div>
+        
+        <h3>Contact</h3>
+        <ul>
+            <li>Email: contact#dango.ink</li>
+            <li>GitHub: <a href="https://github.com/plasma-blue" target="_blank">plasma-blue</a></li>
+        </ul>
+    
+</div>
+
+
+</main>
+        <footer class="site-footer">
+            <p>&copy; 2026 🍡 Dango Blog</p>
+            <div class="footer-links">
+                
+                    <a href="terms-en.html">Terms of Service</a>
+                    <span class="separator">·</span>
+                    <a href="privacy-en.html">Privacy Policy</a>
+                    <span class="separator">·</span>
+                    <a href="rss.xml">RSS Feed</a>
+                    <span class="separator">·</span>
+                    <a href="sitemap.xml">Sitemap</a>
+                
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
+

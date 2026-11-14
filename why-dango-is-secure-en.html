@@ -1,0 +1,180 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Why Dango is Secure | Dango Blog</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍡</text></svg>">
+    
+    <!-- 关键 CSS 内联，防止白屏闪烁 (FOUC) -->
+    <style>
+        :root {
+            --bg-color: #f4f7f6;
+            --text-color: #343a40;
+        }
+        body {
+              background-color: var(--bg-color);
+              color: var(--text-color);
+              margin: 0;
+              padding: 0;
+              /* 初始隐藏，配合 CSS 动画平滑显示 */
+              opacity: 0;
+              animation: fadeIn 0.4s ease-out forwards;
+          }
+          @keyframes fadeIn {
+              from { opacity: 0; transform: translateY(10px); }
+              to { opacity: 1; transform: translateY(0); }
+          }
+         .container {
+             max-width: 840px;
+             margin: 0 auto;
+         }
+     </style>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="rss.xml">
+    
+    
+
+    
+</head>
+<body>
+    <div class="container">
+        <header class="site-header">
+            <a href="en.html" class="site-title"><span class="site-logo-icon">🍡</span><span class="site-logo-text">Dango Blog</span></a>
+            
+<nav>
+    <a href="en.html">Home</a>
+    <a href="archive-en.html">Archive</a>
+    <a href="about-en.html">About</a>
+    <a href="why-dango-is-secure.html" class="lang-switch-btn" onclick="try{localStorage.setItem('dango_blog_lang','zh')}catch(e){}">中文</a>
+</nav>
+        </header>
+        <main>
+
+<div class="card">
+    <article class="post">
+        <h1>Why Dango is Secure</h1>
+        <div class="meta">
+            <span>Published on: 2026-07-17</span>
+        </div>
+        
+            <div class="tags">
+                
+                    <a href="tag-dango.html">#dango</a>
+                
+                    <a href="tag-security.html">#security</a>
+                
+                    <a href="tag-specification.html">#specification</a>
+                
+            </div>
+        
+        <hr>
+        <div class="post-content">
+            <p><em>The following content was generated from a comprehensive security and privacy audit of the codebase:</em></p>
+<hr>
+<h3><strong>Dango&#39;s Security &amp; Privacy Model Analysis</strong></h3>
+<p>Dango&#39;s security and privacy architecture is built upon a fundamental design principle: <strong>it is a pure client-side web application</strong>. All computations, data processing, and state storage occur strictly within the user&#39;s local environment (the web browser). There is no centralized backend server, no application database, and no intermediate cloud processing involved in managing user data.</p>
+<p>Based on this principle, we can examine Dango&#39;s technical implementation and security implications across several critical dimensions.</p>
+<hr>
+<h3><strong>1. Data Persistence: Browser Local Storage</strong></h3>
+<ul>
+<li><strong>Implementation</strong>: The application uses the browser&#39;s native <code>localStorage</code> API to persist canvas data (nodes, connectors, viewport transform state) and user preferences. All keys are scoped with the <code>cc-</code> prefix in the browser&#39;s storage sandbox.</li>
+<li><strong>Security Implications</strong>: <code>localStorage</code> is strictly governed by the browser&#39;s <strong>Same-Origin Policy (SOP)</strong>. Only scripts executing within the <code>dango.ink</code> origin can read or modify this data; no third-party site can access or tamper with it. The data remains strictly bound to the user&#39;s local browser instance, is never synced across devices without explicit user action, and is never transmitted to remote servers. Data cleanup is completely under the user&#39;s control and can be permanently removed via the browser&#39;s built-in &quot;Clear Site Data&quot; utility.</li>
+</ul>
+<hr>
+<h3><strong>2. Data Sharing: URL Fragment Identifiers</strong></h3>
+<ul>
+<li><strong>Implementation</strong>: When a user selects &quot;Share&quot;, Dango compresses the full canvas data on the client side using the <code>lz-string</code> library and encodes it into the URL fragment (Hash), yielding a URL format like <code>...dango.ink/#&lt;compressed_data&gt;</code>.</li>
+<li><strong>Security Implications</strong>: According to the HTTP protocol specifications (RFC 3986), the fragment component following <code>#</code> is <strong>never sent by the browser in HTTP request headers to the server</strong>. It is strictly a client-side beacon used for in-page navigation and state management. Consequently, the generation, compression, and parsing of share links are executed entirely in the local browser. The data leaves the device only when the user deliberately sends the generated link to a recipient, bypassing any intermediary server or tracking service.</li>
+</ul>
+<hr>
+<h3><strong>3. External Communication: Optional On-Demand Fonts</strong></h3>
+<ul>
+<li><strong>Implementation</strong>: By default, Dango initiates zero outbound network requests after initial page load. The only exception occurs when a user explicitly enables the &quot;Handwriting Style&quot; option, which fetches font files from <code>fonts.googleapis.com</code>.</li>
+<li><strong>Security Implications</strong>: This is an explicit, optional, and single-purpose network request. It carries no user identity, canvas content, or tracking payloads. Users with strict offline requirements or privacy concerns regarding external CDN requests can simply leave this feature off, ensuring the application functions in a completely air-gapped, zero-network environment.</li>
+</ul>
+<hr>
+<h3><strong>4. Deployment &amp; Runtime: Static File Delivery</strong></h3>
+<ul>
+<li><strong>Implementation</strong>: Dango&#39;s online deployment model is remarkably minimalist. It serves a pre-built static bundle via Nginx, with CSS and JavaScript assets optimized and delivered as plain static files.</li>
+<li><strong>Security Implications</strong>: The server does not execute dynamic backend runtimes (such as Node.js, Python, or PHP) and maintains no databases. As a result, traditional server-side attack vectors—such as SQL injection, server-side request forgery (SSRF), and remote code execution (RCE)—are fundamentally eliminated. The attack surface is reduced solely to standard static file hosting.</li>
+</ul>
+<hr>
+<h3><strong>5. Browser Extension: Principle of Least Privilege</strong></h3>
+<ul>
+<li><strong>Implementation</strong>: The companion extensions for Chromium and Firefox request the bare minimum permissions in <code>manifest.json</code>:<ul>
+<li><code>&quot;permissions&quot;: [&quot;tabs&quot;]</code>: Used solely to detect or focus an existing Dango tab when the extension icon is clicked, preserving a seamless single-instance workflow.</li>
+<li><code>&quot;data_collection_permissions&quot;: {&quot;required&quot;: [&quot;none&quot;]}</code>: Explicitly declaring to the browser store and users that zero data is collected.</li>
+</ul>
+</li>
+<li><strong>Security Implications</strong>: Extension capabilities are strictly limited to basic tab management. It does not inspect page contents, monitor web traffic, or communicate with external telemetry endpoints. This commitment is verified during store audit processes.</li>
+</ul>
+<hr>
+<h3><strong>6. Supply Chain Integrity: Minimalist Dependencies</strong></h3>
+<ul>
+<li><strong>Implementation</strong>: In its runtime environment, Dango depends solely on one lightweight utility library, <code>lz-string.min.js</code>, for data compression. It avoids heavy runtime frontend frameworks (e.g., React, Angular, Vue), implementing its core rendering and interaction engine in clean, native JavaScript.</li>
+<li><strong>Security Implications</strong>: Minimizing dependencies directly reduces vulnerability to software supply chain attacks. <code>lz-string</code> is a battle-tested, single-purpose library with an auditable and predictable code footprint—in stark contrast to applications that bundle hundreds of unvetted packages.</li>
+</ul>
+<hr>
+<h3><strong>Summary of Security Architecture</strong></h3>
+<table>
+<thead>
+<tr>
+<th align="left">Dimension</th>
+<th align="left">Implementation</th>
+<th align="left">Security &amp; Privacy Guarantee</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>Data Storage</strong></td>
+<td align="left">Pure client-side via <code>localStorage</code></td>
+<td align="left">Data never leaves the device; eliminates server breach risks</td>
+</tr>
+<tr>
+<td align="left"><strong>Data Sharing</strong></td>
+<td align="left">Client-side URL Hash encoding</td>
+<td align="left">Transmitted peer-to-peer by user choice; zero server transit</td>
+</tr>
+<tr>
+<td align="left"><strong>Network Traffic</strong></td>
+<td align="left">Zero outbound requests by default (optional fonts)</td>
+<td align="left">Minimal external surface; transparent, offline-capable</td>
+</tr>
+<tr>
+<td align="left"><strong>Server Runtime</strong></td>
+<td align="left">Static file hosting (Nginx)</td>
+<td align="left">No backend execution or DB; zero server-side attack surface</td>
+</tr>
+<tr>
+<td align="left"><strong>Dependencies</strong></td>
+<td align="left">Zero runtime framework; single utility library</td>
+<td align="left">Supply chain risk minimized to the highest feasible standard</td>
+</tr>
+</tbody></table>
+<p>In conclusion, Dango&#39;s design philosophy embodies <strong>defense-in-depth focused entirely on the client side</strong>. By systematically removing reliance on centralized servers, it eliminates an entire class of security vulnerabilities and privacy risks. Users retain unconditional ownership and full sovereignty over their data.</p>
+
+        </div>
+    </article>
+</div>
+
+
+</main>
+        <footer class="site-footer">
+            <p>&copy; 2026 🍡 Dango Blog</p>
+            <div class="footer-links">
+                
+                    <a href="terms-en.html">Terms of Service</a>
+                    <span class="separator">·</span>
+                    <a href="privacy-en.html">Privacy Policy</a>
+                    <span class="separator">·</span>
+                    <a href="rss.xml">RSS Feed</a>
+                    <span class="separator">·</span>
+                    <a href="sitemap.xml">Sitemap</a>
+                
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

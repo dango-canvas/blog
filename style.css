@@ -1,0 +1,436 @@
+:root {
+    --text-color: #343a40;
+    --primary-color: #258292; /* <-- 恢复为之前的绿色系 */
+    --bg-color: #f4f7f6; /* <-- 使用一个更柔和的背景色 */
+    --card-bg-color: #ffffff;
+    --border-color: #e9ecef;
+    --meta-color: #6c757d;
+    --code-bg-color: #f1f3f5;
+}
+
+body {
+    /* 使用一个更强大的系统字体栈 */
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", "Arial", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    line-height: 1.8;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    margin: 0;
+    padding: 20px 20px;
+}
+
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color 0.2s ease-in-out;
+}
+a:hover {
+    color: #003d80;
+    text-decoration: underline;
+}
+
+/* --- 布局 --- */
+.container {
+    max-width: 840px;
+    margin: 0 auto;
+}
+
+.site-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.site-title {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: var(--text-color);
+    white-space: nowrap;
+}
+.site-title:hover {
+    text-decoration: none;
+}
+.site-logo-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.15em;
+    line-height: 1;
+}
+.site-logo-text {
+    line-height: 1.2;
+}
+.site-header nav {
+    display: flex;
+    align-items: center;
+}
+.site-header nav a {
+    margin-left: 24px;
+    color: var(--meta-color);
+    font-size: 1em;
+    line-height: 1.5;
+    white-space: nowrap;
+}
+.site-header nav a.lang-switch-btn {
+    margin-left: 20px;
+    position: relative;
+    top: 1.5px; /* 光学校准：对齐中文字符横向视觉中心线 */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3px 10px;
+    border-radius: 14px;
+    font-size: 0.9em;
+    font-weight: 600;
+    line-height: 1.25;
+    color: var(--primary-color);
+    background-color: #e7f5ff;
+    border: 1px solid #cbe7fc;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+    transition: all 0.2s ease-in-out;
+}
+.site-header nav a.lang-switch-btn:hover {
+    background-color: #d0ebff;
+    border-color: var(--primary-color);
+    text-decoration: none;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 6px rgba(37, 130, 146, 0.15);
+}
+
+.empty-state {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--meta-color);
+}
+
+.card {
+    background: var(--card-bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 40px 50px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+}
+
+.site-footer {
+    margin-top: 60px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-color);
+    text-align: center;
+    font-size: 0.9em;
+    color: var(--meta-color);
+}
+
+.site-footer p {
+    margin-bottom: 8px;
+}
+
+.footer-links a {
+    color: var(--meta-color);
+    margin: 0 5px;
+}
+
+.footer-links a:hover {
+    color: var(--primary-color);
+}
+
+.footer-links .separator {
+    color: #ccc;
+}
+
+hr {
+    border: none;
+    border-top: 1px solid var(--border-color);
+    margin: 30px 0;
+}
+
+/* --- 列表样式 --- */
+.post-list {
+    list-style: none;
+    padding: 0;
+}
+.post-list li {
+    padding: 15px 0;
+    border-bottom: 1px solid var(--border-color);
+    transition: background-color 0.2s;
+}
+.post-list li:last-child {
+    border-bottom: none;
+}
+.post-list li a {
+    font-size: 1.1em;
+    font-weight: 500;
+}
+.pin-badge {
+    display: inline-block;
+    background-color: #ff6b6b;
+    color: white;
+    font-size: 0.75em;
+    padding: 2px 6px;
+    border-radius: 4px;
+    margin-right: 8px;
+    vertical-align: middle;
+    font-weight: bold;
+    line-height: 1.2;
+}
+.post-list .meta {
+    float: right;
+    font-size: 0.9em;
+    color: var(--meta-color);
+}
+
+
+/* --- 文章页样式 --- */
+.post h1 {
+    font-size: 1.7em;
+    margin-bottom: 0.5em;
+    color: #258292;
+}
+.post .meta {
+    color: var(--meta-color);
+    font-size: 0.9em;
+    margin-bottom: 20px;
+}
+.post .tags {
+    margin: 10px 0 20px 0; /* 从 margin-left 改为上下 margin */
+}
+.post .tags a {
+    color: var(--primary-color);
+    background-color: #e7f5ff;
+    margin-right: 8px;
+    padding: 3px 10px;
+    border-radius: 15px;
+    font-size: 0.85em;
+}
+.post .tags a:hover {
+    background-color: #d0ebff;
+    text-decoration: none;
+}
+
+.post-content h2, .post-content h3 {
+    margin-top: 2em;
+    padding-bottom: 0.3em;
+    border-bottom: 1px solid var(--border-color);
+}
+.post-content blockquote {
+    border-left: 4px solid var(--primary-color);
+    padding-left: 1em;
+    margin: 2em 0;
+    color: #555;
+    background-color: var(--bg-color);
+    padding: 1em;
+    border-radius: 0 4px 4px 0;
+}
+.post-content pre {
+    background-color: var(--code-bg-color);
+    padding: 1.2em;
+    border-radius: 6px;
+    overflow-x: auto;
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+    font-size: 0.9em;
+    line-height: 1.5;
+}
+
+/* 移除 post.html 里的 iframe 默认样式 */
+.post-content iframe {
+    width: 100%;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+/* 添加到 style.css 中 */
+.site-description {
+    font-size: 1.1em;
+    color: var(--meta-color);
+    text-align: center;
+    margin-top: -10px;
+}
+
+.list-footer {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.read-more {
+    display: inline-block;
+    padding: 8px 20px;
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: 20px;
+    transition: background-color 0.2s;
+}
+
+.read-more:hover {
+    background-color: #1e6a78; /* 绿色的深色变体 */
+    color: white;
+    text-decoration: none;
+}
+
+/* --- 关于页样式 --- */
+.author-section {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.author-avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 3px solid var(--primary-color);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.author-info {
+    flex: 1;
+}
+
+.author-info h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.submission-box {
+    background-color: #fff9db;
+    border: 1px dashed #fcc419;
+    padding: 15px 20px;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+.submission-box h4 {
+    margin-top: 0;
+    margin-bottom: 8px;
+    color: #e67700;
+}
+
+/* --- 时间线样式 --- */
+.timeline {
+    position: relative;
+    padding-left: 30px;
+    border-left: 2px solid var(--border-color);
+}
+.timeline-year {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin: 40px 0 20px -30px;
+    padding-left: 28px;
+    background-color: var(--bg-color); /* 用背景色遮挡住后面的线 */
+}
+.timeline-year:first-child {
+    margin-top: 20px;
+}
+.timeline-item {
+    position: relative;
+    display: flex;
+    align-items: baseline;
+    margin: 15px 0;
+}
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -37px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 12px;
+    height: 12px;
+    background-color: var(--card-bg-color);
+    border: 2px solid var(--primary-color);
+    border-radius: 50%;
+    z-index: 1;
+}
+.timeline-meta {
+    color: var(--meta-color);
+    min-width: 60px;
+    margin-right: 20px;
+}
+.timeline-content a {
+    font-size: 1.1em;
+}
+
+/* --- 移动端响应式适配与排版优化 --- */
+@media (max-width: 768px) {
+    body {
+        /* 左右边距调整为 16px 标准呼吸边距，彻底告别 10px 的逼仄尴尬感 */
+        padding: 16px 16px 36px;
+    }
+
+    .site-header {
+        /* 移动端上下分层对称设计，校准上下纵向留白节奏 */
+        flex-direction: column;
+        align-items: center;
+        gap: 14px;
+        margin-top: 6px;
+        margin-bottom: 18px;
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .site-title {
+        font-size: 1.45em;
+        white-space: nowrap;
+        gap: 8px;
+    }
+
+    /* 移动端光学配重：在右侧镜像生成与 emoji 图标等宽 (1.15em) 的幽灵占位元素，使得标题文字的中轴线严格居中对齐屏幕 */
+    .site-title::after {
+        content: '';
+        display: inline-block;
+        width: 1.15em;
+        pointer-events: none;
+    }
+
+    .site-header nav {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: nowrap;
+        gap: 14px; /* 统一收敛间距，消除文字与胶囊之间的脱节与松散 */
+    }
+
+    .site-header nav a {
+        margin-left: 0;
+        font-size: 0.95em;
+        white-space: nowrap;
+    }
+
+    .site-header nav a.lang-switch-btn {
+        margin-left: 0; /* 移除额外 margin，由父容器 gap 严格均分 */
+        padding: 3px 9px;
+        white-space: nowrap;
+        top: 1px;
+    }
+
+    .card {
+        padding: 26px 20px;
+        border-radius: 12px;
+        /* 移动端精致浅层微投影，四周呼吸感自然 */
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02);
+    }
+
+    .post h1 {
+        font-size: 1.35em;
+        line-height: 1.35;
+        word-break: break-word;
+    }
+
+    .post-content h2 {
+        font-size: 1.25em;
+    }
+
+    .post-content h3 {
+        font-size: 1.1em;
+    }
+
+    .author-section {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+}

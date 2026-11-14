@@ -1,0 +1,150 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dango Privacy Policy | Dango Blog</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍡</text></svg>">
+    
+    <!-- 关键 CSS 内联，防止白屏闪烁 (FOUC) -->
+    <style>
+        :root {
+            --bg-color: #f4f7f6;
+            --text-color: #343a40;
+        }
+        body {
+              background-color: var(--bg-color);
+              color: var(--text-color);
+              margin: 0;
+              padding: 0;
+              /* 初始隐藏，配合 CSS 动画平滑显示 */
+              opacity: 0;
+              animation: fadeIn 0.4s ease-out forwards;
+          }
+          @keyframes fadeIn {
+              from { opacity: 0; transform: translateY(10px); }
+              to { opacity: 1; transform: translateY(0); }
+          }
+         .container {
+             max-width: 840px;
+             margin: 0 auto;
+         }
+     </style>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="rss.xml">
+    
+    
+
+    
+</head>
+<body>
+    <div class="container">
+        <header class="site-header">
+            <a href="en.html" class="site-title"><span class="site-logo-icon">🍡</span><span class="site-logo-text">Dango Blog</span></a>
+            
+<nav>
+    <a href="en.html">Home</a>
+    <a href="archive-en.html">Archive</a>
+    <a href="about-en.html">About</a>
+    <a href="privacy.html" class="lang-switch-btn" onclick="try{localStorage.setItem('dango_blog_lang','zh')}catch(e){}">中文</a>
+</nav>
+        </header>
+        <main>
+
+<div class="card">
+    <article class="post-content">
+        <h1>Dango Privacy Policy</h1>
+<p><strong>Effective Date</strong>: September 1, 2026<br><strong>Last Updated</strong>: September 9, 2026  </p>
+<p>Dango (&quot;we&quot;, &quot;us&quot;, or &quot;our&quot;) is an open-source visual thinking and diagramming tool maintained by independent creators. We are firmly committed to a pure product philosophy: <strong>&quot;Local-First, Zero-Tracking, and Total User Data Ownership.&quot;</strong></p>
+<p>This Privacy Policy objectively and transparently describes how Dango operates, how data is processed, and why your information remains private and secure when using our tool.</p>
+<hr>
+<h3>1. Core Architecture: Client-Side Execution &amp; Zero-Server Storage</h3>
+<ol>
+<li><p><strong>No Accounts &amp; Zero Personal Information Collection</strong></p>
+<ul>
+<li>Dango does not offer or require account registration. We do not collect, request, store, or process any Personally Identifiable Information (PII), such as your name, email address, phone number, physical address, or unique device identifiers.</li>
+</ul>
+</li>
+<li><p><strong>Local-First &amp; No Backend Database (Zero-Server Storage)</strong></p>
+<ul>
+<li>Dango is a purely client-side Single Page Application (SPA) executed entirely within your web browser.</li>
+<li>All text content, node layouts, diagram connections, notes, grouping structures, and custom configuration settings that you create remain strictly within your browser&#39;s local storage (<code>localStorage</code>) or within local <code>.dango</code> files exported by you.</li>
+<li><strong>We operate no backend databases or application servers to receive, store, analyze, or synchronize your canvas content.</strong> Your creative thoughts and intellectual notes never leave your personal device.</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3>2. Network Infrastructure &amp; Third-Party Services</h3>
+<ol>
+<li><p><strong>Cloudflare Infrastructure &amp; Technical Network Access Logs</strong></p>
+<ul>
+<li>The official hosted web application (e.g., <code>dango.ink</code> and <code>blog.dango.ink</code>) is hosted and delivered via the Cloudflare platform (Cloudflare Pages / CDN).</li>
+<li>When your browser connects to our web application to download static assets (HTML, JavaScript, CSS, icons, etc.), Cloudflare, as an infrastructure and CDN provider, may automatically record standard HTTP/HTTPS technical request logs for the purposes of security defense (e.g., mitigating DDoS attacks), network routing, traffic management, and system reliability.</li>
+<li>These technical access logs typically include: visitor IP addresses, browser User-Agent strings, requested URLs, referring URLs (Referer), and access timestamps.</li>
+<li>These logs are processed and governed under the <a href="https://www.cloudflare.com/privacypolicy/">Cloudflare Privacy Policy</a>. <strong>The developers of Dango do not and cannot correlate these network infrastructure logs with any specific diagram, node, or text created locally on your canvas.</strong></li>
+</ul>
+</li>
+<li><p><strong>Third-Party External Resources (External Images &amp; Fonts)</strong></p>
+<ul>
+<li><strong>External Images &amp; Wallpapers</strong>: If you choose to embed external image URLs or set remote wallpaper URLs, your browser will make a direct HTTP/HTTPS request to the respective third-party hosting server. Such interactions are subject to the privacy practices of those external hosts.</li>
+<li><strong>On-Demand Font Loading</strong>: Dango prioritizes native system handwriting fonts (such as <code>Segoe Print</code> on Windows and <code>Chalkboard SE</code> on macOS). When specific handwriting modes are enabled, Chinese font assets (LXGW WenKai) may be loaded on-demand from Google Fonts CDN.</li>
+<li><strong>Completely Offline Air-Gapped Use</strong>: For privacy-critical or enterprise environments requiring strict network isolation, you can download our standalone single-file distribution (<code>dango.html</code>) or deploy via Docker, running the entire application completely offline without any internet connection.</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3>3. Canvas Sharing &amp; Link Generation</h3>
+<p>Dango provides a client-side &quot;Share as Link&quot; (<code>LINK</code> / <code>EMBED</code>) feature:</p>
+<ul>
+<li>This feature utilizes the pure client-side <code>LZString</code> compression algorithm to compress and encode your canvas data entirely into the URL anchor hash (the portion following the <code>#</code> symbol).</li>
+<li>In accordance with standard W3C and HTTP protocol specifications, <strong>URL hashes are processed exclusively by your local browser client and are never transmitted to web servers as part of HTTP requests.</strong></li>
+<li>Canvas data encoded in a hash can only be unpacked and viewed by individuals who hold the complete URL (including the hash), within their own browser. No copy of your canvas data is retained or stored on any server during link creation.</li>
+</ul>
+<hr>
+<h3>4. Zero Tracking, Zero Analytics &amp; Zero Commercial Cookies</h3>
+<ul>
+<li><strong>No Advertisements</strong>: Dango does not display any third-party commercial advertisements.</li>
+<li><strong>No Analytics Trackers</strong>: We do not embed analytics SDKs or behavioral tracking probes (e.g., Google Analytics, Meta Pixel, or telemetry trackers).</li>
+<li><strong>No Marketing Cookies</strong>: We do not place persistent HTTP tracking cookies on your device.</li>
+</ul>
+<hr>
+<h3>5. Your Absolute Data Control &amp; Erasure</h3>
+<p>You retain complete and unfettered control over all data stored locally on your device:</p>
+<ul>
+<li><strong>Instant Canvas Clearing</strong>: Clicking the &quot;Clear Canvas&quot; (trash bin) button immediately purges the active canvas from your local storage.</li>
+<li><strong>Browser Clearing</strong>: You can purge all saved canvas data at any time via your browser&#39;s &quot;Clear Site Data / Clear Cache&quot; settings.</li>
+<li><strong>Private Browsing</strong>: Utilizing Incognito or Private Browsing mode ensures all locally cached canvas records are automatically and permanently destroyed upon closing the browser window.</li>
+</ul>
+<hr>
+<h3>6. Updates &amp; Contact</h3>
+<p>We may periodically revise this Privacy Policy to reflect technical refinements or evolving legal standards. Revisions will be published on our official developer blog and open-source repository.</p>
+<p>For questions, feedback, or concerns regarding our privacy practices, please reach out via:</p>
+<ul>
+<li><strong>Official Blog</strong>: <a href="https://blog.dango.ink">https://blog.dango.ink</a></li>
+<li><strong>GitHub Repository</strong>: <a href="https://github.com/dango-canvas/dango">https://github.com/dango-canvas/dango</a></li>
+</ul>
+
+    </article>
+</div>
+
+
+</main>
+        <footer class="site-footer">
+            <p>&copy; 2026 🍡 Dango Blog</p>
+            <div class="footer-links">
+                
+                    <a href="terms-en.html">Terms of Service</a>
+                    <span class="separator">·</span>
+                    <a href="privacy-en.html">Privacy Policy</a>
+                    <span class="separator">·</span>
+                    <a href="rss.xml">RSS Feed</a>
+                    <span class="separator">·</span>
+                    <a href="sitemap.xml">Sitemap</a>
+                
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

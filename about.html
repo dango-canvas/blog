@@ -1,0 +1,106 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>关于 | 团子博客</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍡</text></svg>">
+    
+    <!-- 关键 CSS 内联，防止白屏闪烁 (FOUC) -->
+    <style>
+        :root {
+            --bg-color: #f4f7f6;
+            --text-color: #343a40;
+        }
+        body {
+              background-color: var(--bg-color);
+              color: var(--text-color);
+              margin: 0;
+              padding: 0;
+              /* 初始隐藏，配合 CSS 动画平滑显示 */
+              opacity: 0;
+              animation: fadeIn 0.4s ease-out forwards;
+          }
+          @keyframes fadeIn {
+              from { opacity: 0; transform: translateY(10px); }
+              to { opacity: 1; transform: translateY(0); }
+          }
+         .container {
+             max-width: 840px;
+             margin: 0 auto;
+         }
+     </style>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="rss.xml">
+    
+    
+
+    
+</head>
+<body>
+    <div class="container">
+        <header class="site-header">
+            <a href="index.html" class="site-title"><span class="site-logo-icon">🍡</span><span class="site-logo-text">团子博客</span></a>
+            
+<nav>
+    <a href="index.html">首页</a>
+    <a href="archive.html">归档</a>
+    <a href="about.html">关于</a>
+    <a href="about-en.html" class="lang-switch-btn" onclick="try{localStorage.setItem('dango_blog_lang','en')}catch(e){}">EN</a>
+</nav>
+        </header>
+        <main>
+
+<div class="card about-page">
+    
+        <h2>关于本站</h2>
+        <p>欢迎来到 团子博客！</p>
+        <p>这里会记录团子画板的开发日志，以及一些使用团子画板理清思路的文章。</p>
+        
+        <hr>
+        
+        <div class="author-section">
+            <img src="https://avatars.githubusercontent.com/u/67679830" alt="plasma-blue" class="author-avatar">
+            <div class="author-info">
+                <h3>关于作者</h3>
+                <p>这里是 <strong>plasma-blue</strong>。我热衷于解构复杂的事物，并从中建构出新的意义。目前，我正专注于 <strong>团子画板 (Dango)</strong> 的开发与迭代。</p>
+                <p>除了编程，我最近还在苦练杂耍球，试图在现实世界中也找寻一种动态的平衡。</p>
+            </div>
+        </div>
+
+        <div class="submission-box">
+            <h4>🎨 接收投稿</h4>
+            <p>如果你使用了团子画板创作了有趣的作品，欢迎向本博客投稿！</p>
+        </div>
+        
+        <h3>联系方式</h3>
+        <ul>
+            <li>Email: contact#dango.ink</li>
+            <li>GitHub: <a href="https://github.com/plasma-blue" target="_blank">plasma-blue</a></li>
+        </ul>
+    
+</div>
+
+
+</main>
+        <footer class="site-footer">
+            <p>&copy; 2026 🍡 团子博客</p>
+            <div class="footer-links">
+                
+                    <a href="terms.html">服务条款</a>
+                    <span class="separator">·</span>
+                    <a href="privacy.html">隐私声明</a>
+                    <span class="separator">·</span>
+                    <a href="rss.xml">RSS 订阅</a>
+                    <span class="separator">·</span>
+                    <a href="sitemap.xml">站点地图</a>
+                
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
+

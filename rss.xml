@@ -1,0 +1,530 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title><![CDATA[团子博客]]></title>
+        <description><![CDATA[这里会记录团子画板的开发日志，以及一些使用团子画板理清思路的文章。]]></description>
+        <link>https://dango-canvas.github.io/blog</link>
+        <generator>RSS for Node</generator>
+        <lastBuildDate>Sat, 14 Nov 2026 09:32:04 GMT</lastBuildDate>
+        <atom:link href="https://dango-canvas.github.io/blog/rss.xml" rel="self" type="application/rss+xml"/>
+        <language><![CDATA[zh-CN]]></language>
+        <item>
+            <title><![CDATA[团子画板域名到期与迁移至 GitHub Pages 指南]]></title>
+            <description><![CDATA[<p>团子画板（Dango）自上线以来，一直运行在 <code>dango.ink</code> 域名下。因该域名即将到期维护，为保障服务的持续可用与长期稳定，Dango 现迁移至 GitHub Pages 静态托管，并统一归入 <code>dango-canvas</code> 组织下管理。</p>
+<p>由于 Dango 自设计之初就遵循纯客户端、本地优先（Local-First）且无后端的架构，这次迁移对数据和日常使用的影响极小。本文将针对不同使用场景，详细说明迁移步骤与链接更新方式。</p>
+<hr>
+<h2>1. 新访问地址一览</h2>
+<p>所有相关站点已整合迁移至 GitHub Pages 静态托管：</p>
+<ul>
+<li><strong>在线画板（Web App）</strong>：<a href="https://dango-canvas.github.io/dango/">https://dango-canvas.github.io/dango/</a></li>
+<li><strong>产品落地页（Landing Page）</strong>：<a href="https://dango-canvas.github.io/page/">https://dango-canvas.github.io/page/</a></li>
+<li><strong>官方博客（Blog）</strong>：<a href="https://dango-canvas.github.io/blog/">https://dango-canvas.github.io/blog/</a></li>
+<li><strong>GitHub 组织主页</strong>：<a href="https://github.com/dango-canvas">https://github.com/dango-canvas</a></li>
+</ul>
+<hr>
+<h2>2. 普通网页用户：如何迁移本地画板数据</h2>
+<h3>机制说明</h3>
+<p>Dango 的核心理念是<strong>本地优先</strong>。你的画板草稿与节点数据保存在浏览器本地的 <code>localStorage</code> 中，从未上传到任何云端数据库。</p>
+<p>受现代浏览器的**同源策略（Same-Origin Policy）**安全机制限制，不同的域名之间的本地存储互相隔离。因此，当你首次打开新的 GitHub Pages 域名时，浏览器无法直接读取旧域名下的本地画板，需要进行一次简单的数据交接。</p>
+<h3>迁移步骤（耗时约 10 秒）</h3>
+<ol>
+<li>打开当前的 <code>dango.ink</code> 页面。</li>
+<li>按下快捷键 <code>Ctrl + S</code>（Mac 用户为 <code>Cmd + S</code>），或点击右下角导出菜单中的<strong>导出为 Dango 文件</strong>，将当前的画布保存为 <code>.dango</code> 文件。</li>
+<li>打开新地址：<a href="https://dango-canvas.github.io/dango/">https://dango-canvas.github.io/dango/</a>。</li>
+<li>将刚刚下载的 <code>.dango</code> 文件<strong>直接拖拽</strong>进新网页的画布中（或点击右下角的导入按钮进行加载）。</li>
+<li>数据即刻无损加载完毕，并在新域名下自动建立本地持久化存储。</li>
+</ol>
+<hr>
+<h2>3. 分享链接与嵌入模式用户：如何更新链接</h2>
+<p>如果你此前在 Obsidian、Notion、个人博客中通过 Iframe 嵌入过 Dango 画板，或者收藏了分享链接：</p>
+<h3>机制说明</h3>
+<p>Dango 的分享链接与嵌入代码具有独特的<strong>无状态特性</strong>：画布的全部节点、连线与排版数据，均在客户端通过 <code>lz-string</code> 算法压缩并存放在 URL 的 <code>#</code>（Hash）片段中，完全不依赖中心化服务器解析。</p>
+<h3>更新方法：纯字符串网址替换</h3>
+<p>由于数据全部包含在链接后缀中，你只需要将原有的域名更换为新域名，后续的参数和 Hash 数据完全保持原样即可继续正常渲染。</p>
+<h4>① 普通分享链接</h4>
+<ul>
+<li>旧链接格式：<pre><code class="language-text">https://dango.ink/#NoJgNMwAxgRAVPQPBuEN9wR2q...
+</code></pre>
+</li>
+<li>替换为新链接：<pre><code class="language-text">https://dango-canvas.github.io/dango/#NoJgNMwAxgRAVPQPBuEN9wR2q...
+</code></pre>
+</li>
+</ul>
+<h4>② Iframe 嵌入代码（Notion / Obsidian / 博客等）</h4>
+<ul>
+<li>旧嵌入代码：<pre><code class="language-html">&lt;iframe src=&quot;https://dango.ink/?embed=true#NoJgNMwAxg...&quot; style=&quot;width: 100%; height: 500px; border: none; border-radius: 12px;&quot; allow=&quot;clipboard-write&quot;&gt;&lt;/iframe&gt;
+</code></pre>
+</li>
+<li>只需将 <code>src</code> 中的网址替换为新地址：<pre><code class="language-html">&lt;iframe src=&quot;https://dango-canvas.github.io/dango/?embed=true#NoJgNMwAxg...&quot; style=&quot;width: 100%; height: 500px; border: none; border-radius: 12px;&quot; allow=&quot;clipboard-write&quot;&gt;&lt;/iframe&gt;
+</code></pre>
+</li>
+</ul>
+<hr>
+<h2>4. 浏览器扩展与离线单文件分发</h2>
+<ul>
+<li><strong>Firefox 浏览器扩展</strong>：后续版本将更新默认打开的 Web 目标地址，已安装用户可继续正常使用离线能力。</li>
+<li><strong>单文件版本（Single-file Distribution）</strong>：如果你直接使用的是从 Release 下载的 <code>dango.html</code> 单文件离线运行，则完全不受此次域名迁移影响。</li>
+</ul>
+<hr>
+<h2>5. 再次重申：安全与隐私承诺</h2>
+<p>迁移到 GitHub Pages 仅改变了静态文件的托管分发网络：</p>
+<ol>
+<li><strong>零后端</strong>：仍然没有后端服务与动态运行时。</li>
+<li><strong>零数据上传</strong>：所有渲染、压缩、解析均在你的设备 CPU/内存中执行。</li>
+<li><strong>开源透明</strong>：构建流程已通过 GitHub Actions 自动化公开，确保交付产物与源代码完全一致。</li>
+</ol>
+<p>感谢大家对 Dango 的支持！如有任何疑问或反馈，欢迎在 <a href="https://github.com/dango-canvas/dango/issues">GitHub Issues</a> 与我们交流。</p>
+]]></description>
+            <link>https://dango-canvas.github.io/blog/migrating-to-github-pages.html</link>
+            <guid isPermaLink="false">https://dango-canvas.github.io/blog/migrating-to-github-pages.html</guid>
+            <pubDate>Sat, 14 Nov 2026 00:00:00 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[Dango Domain Expiration & Migration to GitHub Pages Guide]]></title>
+            <description><![CDATA[<p>Since its inception, Dango Canvas has been served under the <code>dango.ink</code> domain. As this domain is reaching its expiration and maintenance window, Dango is transitioning to GitHub Pages for sustainable hosting under the unified <code>dango-canvas</code> organization.</p>
+<p>Because Dango was architected from day one as a pure client-side, local-first, zero-backend application, the impact of this domain change is minimal. This document outlines the straightforward migration steps for different use cases.</p>
+<hr>
+<h2>1. Updated Site URLs</h2>
+<p>All project sites are now statically hosted on GitHub Pages:</p>
+<ul>
+<li><strong>Web Application</strong>: <a href="https://dango-canvas.github.io/dango/">https://dango-canvas.github.io/dango/</a></li>
+<li><strong>Landing Page</strong>: <a href="https://dango-canvas.github.io/page/">https://dango-canvas.github.io/page/</a></li>
+<li><strong>Official Blog</strong>: <a href="https://dango-canvas.github.io/blog/">https://dango-canvas.github.io/blog/</a></li>
+<li><strong>GitHub Organization</strong>: <a href="https://github.com/dango-canvas">https://github.com/dango-canvas</a></li>
+</ul>
+<hr>
+<h2>2. Standard Web Users: Migrating Your Local Canvas Data</h2>
+<h3>How It Works</h3>
+<p>Dango adheres strictly to a <strong>Local-First</strong> model. Your canvases and nodes are stored exclusively in your browser&#39;s <code>localStorage</code> and never transmitted to remote servers.</p>
+<p>Due to the browser&#39;s <strong>Same-Origin Policy (SOP)</strong>, different domains cannot access each other&#39;s local storage. When you first visit the new GitHub Pages domain, your browser starts with an empty canvas. You simply need to transfer your canvas data once.</p>
+<h3>Migration Steps (Takes ~10 seconds)</h3>
+<ol>
+<li>Open the existing <code>dango.ink</code> web app.</li>
+<li>Press <code>Ctrl + S</code> (<code>Cmd + S</code> on macOS), or open the export menu at the bottom-right and select <strong>Export as Dango File</strong> to save your <code>.dango</code> backup file.</li>
+<li>Open the new site: <a href="https://dango-canvas.github.io/dango/">https://dango-canvas.github.io/dango/</a>.</li>
+<li><strong>Drag and drop</strong> your downloaded <code>.dango</code> file onto the new canvas (or use the import button at the bottom-right).</li>
+<li>Your canvas is instantly loaded and will automatically persist in the new domain&#39;s storage.</li>
+</ol>
+<hr>
+<h2>3. Share Links &amp; Embedded Iframes: Updating URLs</h2>
+<p>If you have embedded Dango in Notion, Obsidian, or your personal website, or saved share links:</p>
+<h3>How It Works</h3>
+<p>Dango&#39;s sharing and embedding mechanism is completely <strong>stateless</strong>. The entire canvas state (nodes, links, layouts) is compressed using <code>lz-string</code> and stored in the URL <code>#</code> (Hash) fragment. No central server is required to resolve or host the content.</p>
+<h3>Solution: Pure String URL Replacement</h3>
+<p>Since all data is embedded in the hash, you only need to swap the origin domain in your link while keeping the parameters and hash intact.</p>
+<h4>① Share Links</h4>
+<ul>
+<li>Old Link:<pre><code class="language-text">https://dango.ink/#NoJgNMwAxgRAVPQPBuEN9wR2q...
+</code></pre>
+</li>
+<li>New Link:<pre><code class="language-text">https://dango-canvas.github.io/dango/#NoJgNMwAxgRAVPQPBuEN9wR2q...
+</code></pre>
+</li>
+</ul>
+<h4>② Embedded Iframe Code (Notion / Obsidian / Blogs)</h4>
+<ul>
+<li>Old Embed Code:<pre><code class="language-html">&lt;iframe src=&quot;https://dango.ink/?embed=true#NoJgNMwAxg...&quot; style=&quot;width: 100%; height: 500px; border: none; border-radius: 12px;&quot; allow=&quot;clipboard-write&quot;&gt;&lt;/iframe&gt;
+</code></pre>
+</li>
+<li>Updated Embed Code:<pre><code class="language-html">&lt;iframe src=&quot;https://dango-canvas.github.io/dango/?embed=true#NoJgNMwAxg...&quot; style=&quot;width: 100%; height: 500px; border: none; border-radius: 12px;&quot; allow=&quot;clipboard-write&quot;&gt;&lt;/iframe&gt;
+</code></pre>
+</li>
+</ul>
+<hr>
+<h2>4. Browser Extensions &amp; Single-File Bundles</h2>
+<ul>
+<li><strong>Firefox Add-on</strong>: A maintenance update will be submitted to redirect to the new Web endpoint. Existing installations will continue working normally offline.</li>
+<li><strong>Single-file Distribution</strong>: If you use the standalone <code>dango.html</code> downloaded from GitHub Releases, you are completely unaffected by this migration.</li>
+</ul>
+<hr>
+<h2>5. Security &amp; Privacy Guarantees</h2>
+<p>Moving to GitHub Pages only changes the static delivery CDN:</p>
+<ol>
+<li><strong>Zero Backend</strong>: No servers or dynamic execution environments.</li>
+<li><strong>Zero Tracking</strong>: Computation, compression, and rendering remain 100% on your device.</li>
+<li><strong>Open &amp; Transparent</strong>: Build steps are executed publicly via GitHub Actions.</li>
+</ol>
+<p>Thank you for using Dango! If you encounter any issues, please feel free to open a ticket on <a href="https://github.com/dango-canvas/dango/issues">GitHub Issues</a>.</p>
+]]></description>
+            <link>https://dango-canvas.github.io/blog/migrating-to-github-pages-en.html</link>
+            <guid isPermaLink="false">https://dango-canvas.github.io/blog/migrating-to-github-pages-en.html</guid>
+            <pubDate>Sat, 14 Nov 2026 00:00:00 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[为什么团子画板是安全的]]></title>
+            <description><![CDATA[<p>以下内容由 Gemini 对代码进行了审计分析生成：</p>
+<hr>
+<p><strong>Dango 的安全与隐私模型分析</strong></p>
+<p>Dango 的安全与隐私模型建立在一个核心架构原则之上：它是一个纯粹的客户端应用程序。这意味着所有计算和数据存储都发生在用户的设备（浏览器）内部，不存在一个中心化的后端服务器来处理或存储用户数据。</p>
+<p>基于此原则，我们可以从几个关键维度来分析其具体的实现方式及其安全含义。</p>
+<p><strong>1. 数据持久化：浏览器本地存储</strong></p>
+<ul>
+<li><strong>实现方式</strong>：应用利用浏览器的 <code>localStorage</code> API 来保存画布数据（节点、连线、视图状态）和用户偏好设置。所有数据都以 <code>cc-</code> 为前缀的键名存储在用户的浏览器中。</li>
+<li><strong>安全含义</strong>：<code>localStorage</code> 受浏览器同源策略的严格限制。这意味着只有 <code>dango.ink</code> 域本身可以访问其写入的数据，其他任何网站都无法读取或篡改。数据与用户的浏览器绑定，不会在不同设备间同步，也不会发送到任何远程服务器。数据清理也完全由用户控制，通过浏览器内置的“清除站点数据”功能即可彻底移除。</li>
+</ul>
+<p><strong>2. 数据交换：URL 片段标识符</strong></p>
+<ul>
+<li><strong>实现方式</strong>：当用户选择“分享”时，应用会将当前画布的完整数据通过 <code>lz-string</code> 库在客户端进行压缩，并将其编码后附加到 URL 的片段（Hash）部分，形式为 <code>...dango.ink/#&lt;compressed_data&gt;</code>。</li>
+<li><strong>安全含义</strong>：根据 HTTP 协议规范，URL 中 <code>#</code> 之后的部分（即片段标识符）不会被浏览器发送到服务器。它完全是客户端侧的信标，用于页面内的导航或状态管理。因此，分享链接的生成、数据的压缩和解析全过程均在本地完成，数据内容仅在用户主动将链接发送给接收方时才会离开设备。这个过程不依赖任何中介服务器。</li>
+</ul>
+<p><strong>3. 外部通信：按需加载的字体资源</strong></p>
+<ul>
+<li><strong>实现方式</strong>：默认情况下，Dango 不会发起任何网络请求。唯一的例外是当用户手动启用“手写风格”选项时，它会向 <code>fonts.googleapis.com</code> 请求加载一个手写字体文件。</li>
+<li><strong>安全含义</strong>：这是一个显式、可选且单一目的的网络请求。它不携带任何用户身份或画布数据。如果用户对与 Google 服务器的任何通信感到顾虑，只需不启用该选项，即可确保应用在完全离线的环境中运行。</li>
+</ul>
+<p><strong>4. 部署与运行环境：纯静态文件服务</strong></p>
+<ul>
+<li><strong>实现方式</strong>：Dango 的线上部署模型极为简单。它通过 Nginx 将一个预先构建好的、内联了所有 CSS 和 JavaScript 的 <code>index.html</code> 文件作为静态资源提供给浏览器。</li>
+<li><strong>安全含义</strong>：服务端不涉及任何动态语言运行时（如 Node.js, PHP, Python），也没有数据库。这使得传统的服务器端攻击向量（如 SQL 注入、远程代码执行）几乎不存在。攻击面被最小化到仅限于静态文件托管服务本身。</li>
+</ul>
+<p><strong>5. 浏览器扩展：最小权限原则</strong></p>
+<ul>
+<li><strong>实现方式</strong>：为 Firefox 提供的配套扩展在 <code>manifest.json</code> 文件中申请了最低限度的权限。<ul>
+<li><code>&quot;permissions&quot;: [&quot;tabs&quot;]</code>：仅用于在用户点击扩展图标时，能够找到或创建一个 Dango 的标签页。</li>
+<li><code>&quot;data_collection_permissions&quot;: {&quot;required&quot;: [&quot;none&quot;]}</code>：这是向 Firefox 商店和用户明确声明，该扩展不收集任何形式的数据。</li>
+</ul>
+</li>
+<li><strong>安全含义</strong>：扩展的功能被严格限制在窗口管理上，它不读取页面内容，不监控网络请求，也不向任何地方发送数据。Firefox 的审查机制也为这一声明提供了额外的保障。</li>
+</ul>
+<p><strong>6. 供应链风险：极简的第三方依赖</strong></p>
+<ul>
+<li><strong>实现方式</strong>：应用在运行时仅依赖一个外部库 <code>lz-string.min.js</code>，用于数据压缩。它没有引入任何大型前端框架（如 React, Vue），核心逻辑均由原生 JavaScript 实现。</li>
+<li><strong>安全含义</strong>：依赖项越少，潜在的供应链攻击风险就越低。<code>lz-string</code> 是一个功能单一、代码量小且久经考验的库，其行为可预测且易于审计。这与依赖数百个包的大型项目形成了鲜明对比。</li>
+</ul>
+<p><strong>总结</strong></p>
+<p>我们可以将 Dango 的安全模型归纳如下：</p>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>实现方式</th>
+<th>安全性保障</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>数据存储</strong></td>
+<td>纯客户端，无后端数据库</td>
+<td>数据从不离开用户设备，杜绝了服务端数据泄露的可能</td>
+</tr>
+<tr>
+<td><strong>数据分享</strong></td>
+<td>客户端 URL Hash 生成</td>
+<td>分享内容不经过服务器，由用户点对点传输</td>
+</tr>
+<tr>
+<td><strong>网络通信</strong></td>
+<td>默认无，可选的字体加载</td>
+<td>最小化与外部服务的交互，且过程透明、可控</td>
+</tr>
+<tr>
+<td><strong>运行环境</strong></td>
+<td>纯静态 Nginx 服务</td>
+<td>无服务器端动态逻辑，攻击面极小</td>
+</tr>
+<tr>
+<td><strong>依赖管理</strong></td>
+<td>零运行时框架，单一功能库</td>
+<td>供应链风险被控制在最低水平</td>
+</tr>
+</tbody></table>
+<p>总的来说，Dango 的设计选择体现了一种纵深防御思想，但防御的重心完全放在了客户端。通过从架构层面根除对服务器的依赖，它系统性地消除了与数据隐私和服务器安全相关的一整类风险。用户对自己的数据拥有绝对的控制权。</p>
+]]></description>
+            <link>https://dango-canvas.github.io/blog/why-dango-is-secure.html</link>
+            <guid isPermaLink="false">https://dango-canvas.github.io/blog/why-dango-is-secure.html</guid>
+            <pubDate>Fri, 17 Jul 2026 00:00:00 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[Why Dango is Secure]]></title>
+            <description><![CDATA[<p><em>The following content was generated from a comprehensive security and privacy audit of the codebase:</em></p>
+<hr>
+<h3><strong>Dango&#39;s Security &amp; Privacy Model Analysis</strong></h3>
+<p>Dango&#39;s security and privacy architecture is built upon a fundamental design principle: <strong>it is a pure client-side web application</strong>. All computations, data processing, and state storage occur strictly within the user&#39;s local environment (the web browser). There is no centralized backend server, no application database, and no intermediate cloud processing involved in managing user data.</p>
+<p>Based on this principle, we can examine Dango&#39;s technical implementation and security implications across several critical dimensions.</p>
+<hr>
+<h3><strong>1. Data Persistence: Browser Local Storage</strong></h3>
+<ul>
+<li><strong>Implementation</strong>: The application uses the browser&#39;s native <code>localStorage</code> API to persist canvas data (nodes, connectors, viewport transform state) and user preferences. All keys are scoped with the <code>cc-</code> prefix in the browser&#39;s storage sandbox.</li>
+<li><strong>Security Implications</strong>: <code>localStorage</code> is strictly governed by the browser&#39;s <strong>Same-Origin Policy (SOP)</strong>. Only scripts executing within the <code>dango.ink</code> origin can read or modify this data; no third-party site can access or tamper with it. The data remains strictly bound to the user&#39;s local browser instance, is never synced across devices without explicit user action, and is never transmitted to remote servers. Data cleanup is completely under the user&#39;s control and can be permanently removed via the browser&#39;s built-in &quot;Clear Site Data&quot; utility.</li>
+</ul>
+<hr>
+<h3><strong>2. Data Sharing: URL Fragment Identifiers</strong></h3>
+<ul>
+<li><strong>Implementation</strong>: When a user selects &quot;Share&quot;, Dango compresses the full canvas data on the client side using the <code>lz-string</code> library and encodes it into the URL fragment (Hash), yielding a URL format like <code>...dango.ink/#&lt;compressed_data&gt;</code>.</li>
+<li><strong>Security Implications</strong>: According to the HTTP protocol specifications (RFC 3986), the fragment component following <code>#</code> is <strong>never sent by the browser in HTTP request headers to the server</strong>. It is strictly a client-side beacon used for in-page navigation and state management. Consequently, the generation, compression, and parsing of share links are executed entirely in the local browser. The data leaves the device only when the user deliberately sends the generated link to a recipient, bypassing any intermediary server or tracking service.</li>
+</ul>
+<hr>
+<h3><strong>3. External Communication: Optional On-Demand Fonts</strong></h3>
+<ul>
+<li><strong>Implementation</strong>: By default, Dango initiates zero outbound network requests after initial page load. The only exception occurs when a user explicitly enables the &quot;Handwriting Style&quot; option, which fetches font files from <code>fonts.googleapis.com</code>.</li>
+<li><strong>Security Implications</strong>: This is an explicit, optional, and single-purpose network request. It carries no user identity, canvas content, or tracking payloads. Users with strict offline requirements or privacy concerns regarding external CDN requests can simply leave this feature off, ensuring the application functions in a completely air-gapped, zero-network environment.</li>
+</ul>
+<hr>
+<h3><strong>4. Deployment &amp; Runtime: Static File Delivery</strong></h3>
+<ul>
+<li><strong>Implementation</strong>: Dango&#39;s online deployment model is remarkably minimalist. It serves a pre-built static bundle via Nginx, with CSS and JavaScript assets optimized and delivered as plain static files.</li>
+<li><strong>Security Implications</strong>: The server does not execute dynamic backend runtimes (such as Node.js, Python, or PHP) and maintains no databases. As a result, traditional server-side attack vectors—such as SQL injection, server-side request forgery (SSRF), and remote code execution (RCE)—are fundamentally eliminated. The attack surface is reduced solely to standard static file hosting.</li>
+</ul>
+<hr>
+<h3><strong>5. Browser Extension: Principle of Least Privilege</strong></h3>
+<ul>
+<li><strong>Implementation</strong>: The companion extensions for Chromium and Firefox request the bare minimum permissions in <code>manifest.json</code>:<ul>
+<li><code>&quot;permissions&quot;: [&quot;tabs&quot;]</code>: Used solely to detect or focus an existing Dango tab when the extension icon is clicked, preserving a seamless single-instance workflow.</li>
+<li><code>&quot;data_collection_permissions&quot;: {&quot;required&quot;: [&quot;none&quot;]}</code>: Explicitly declaring to the browser store and users that zero data is collected.</li>
+</ul>
+</li>
+<li><strong>Security Implications</strong>: Extension capabilities are strictly limited to basic tab management. It does not inspect page contents, monitor web traffic, or communicate with external telemetry endpoints. This commitment is verified during store audit processes.</li>
+</ul>
+<hr>
+<h3><strong>6. Supply Chain Integrity: Minimalist Dependencies</strong></h3>
+<ul>
+<li><strong>Implementation</strong>: In its runtime environment, Dango depends solely on one lightweight utility library, <code>lz-string.min.js</code>, for data compression. It avoids heavy runtime frontend frameworks (e.g., React, Angular, Vue), implementing its core rendering and interaction engine in clean, native JavaScript.</li>
+<li><strong>Security Implications</strong>: Minimizing dependencies directly reduces vulnerability to software supply chain attacks. <code>lz-string</code> is a battle-tested, single-purpose library with an auditable and predictable code footprint—in stark contrast to applications that bundle hundreds of unvetted packages.</li>
+</ul>
+<hr>
+<h3><strong>Summary of Security Architecture</strong></h3>
+<table>
+<thead>
+<tr>
+<th align="left">Dimension</th>
+<th align="left">Implementation</th>
+<th align="left">Security &amp; Privacy Guarantee</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>Data Storage</strong></td>
+<td align="left">Pure client-side via <code>localStorage</code></td>
+<td align="left">Data never leaves the device; eliminates server breach risks</td>
+</tr>
+<tr>
+<td align="left"><strong>Data Sharing</strong></td>
+<td align="left">Client-side URL Hash encoding</td>
+<td align="left">Transmitted peer-to-peer by user choice; zero server transit</td>
+</tr>
+<tr>
+<td align="left"><strong>Network Traffic</strong></td>
+<td align="left">Zero outbound requests by default (optional fonts)</td>
+<td align="left">Minimal external surface; transparent, offline-capable</td>
+</tr>
+<tr>
+<td align="left"><strong>Server Runtime</strong></td>
+<td align="left">Static file hosting (Nginx)</td>
+<td align="left">No backend execution or DB; zero server-side attack surface</td>
+</tr>
+<tr>
+<td align="left"><strong>Dependencies</strong></td>
+<td align="left">Zero runtime framework; single utility library</td>
+<td align="left">Supply chain risk minimized to the highest feasible standard</td>
+</tr>
+</tbody></table>
+<p>In conclusion, Dango&#39;s design philosophy embodies <strong>defense-in-depth focused entirely on the client side</strong>. By systematically removing reliance on centralized servers, it eliminates an entire class of security vulnerabilities and privacy risks. Users retain unconditional ownership and full sovereignty over their data.</p>
+]]></description>
+            <link>https://dango-canvas.github.io/blog/why-dango-is-secure-en.html</link>
+            <guid isPermaLink="false">https://dango-canvas.github.io/blog/why-dango-is-secure-en.html</guid>
+            <pubDate>Fri, 17 Jul 2026 00:00:00 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[团子画板规格说明]]></title>
+            <description><![CDATA[<h3><strong>1. 总体与环境规格</strong></h3>
+<p><strong>1.1. 应用程序形态</strong></p>
+<ul>
+<li><strong>双重形态</strong>: 本质是一个单页 Web 应用 (SPA)，既可以作为独立网站运行，也打包为浏览器扩展。</li>
+<li><strong>浏览器扩展行为</strong>:<ul>
+<li>扩展点击逻辑 (<code>background.js</code>): 点击扩展图标时，会检测当前浏览器窗口是否已有打开的 Dango 标签页。如有则跳转并高亮该标签页，否则新建标签页，确保“单例”体验。</li>
+<li>兼容性: 同时支持 Chrome (Manifest V3 / <code>chrome</code> API) 和 Firefox (Manifest V2 / <code>browser</code> API)。</li>
+</ul>
+</li>
+</ul>
+<p><strong>1.2. 国际化 (i18n)</strong></p>
+<ul>
+<li><strong>语言支持</strong>: 支持简体中文 (<code>zh</code>) 和 英文 (<code>en</code>)。</li>
+<li><strong>检测与持久化</strong>: 优先读取 <code>localStorage</code> (<code>cc-lang</code>)；若无，则检测浏览器语言 <code>navigator.language</code>；默认回退为英文。</li>
+<li><strong>动态更新</strong>: 切换语言时，实时更新页面标题 (<code>document.title</code>)、DOM 文本 (<code>data-i18n</code>)、悬浮提示 (<code>title</code>) 和 输入框占位符 (<code>placeholder</code>)。</li>
+</ul>
+<p><strong>1.3. 主题系统</strong></p>
+<ul>
+<li><strong>模式</strong>: 提供 🌞 浅色 (Light)、🌙 深色 (Dark) 与 🌓 自动 (Auto) 三种模式。</li>
+<li><strong>实现</strong>: 基于 CSS 变量 (<code>:root</code> vs <code>[data-theme=&quot;dark&quot;]</code>)。</li>
+<li><strong>自动模式</strong>: 跟随系统 <code>prefers-color-scheme</code>，系统主题变化时实时刷新。</li>
+<li><strong>持久化</strong>: 设置保存在 <code>localStorage</code> (<code>cc-theme</code>)。</li>
+</ul>
+<hr>
+<h3><strong>2. 画布 (Canvas) 核心规格</strong></h3>
+<p><strong>2.1. 视图交互</strong></p>
+<ul>
+<li><strong>无限画布</strong>: 支持无限平移和缩放。</li>
+<li><strong>平移 (Pan)</strong>:<ul>
+<li><strong>鼠标</strong>: 按住空格键 + 拖拽，或按下鼠标中键 + 拖拽。</li>
+<li><strong>触控</strong>: 单指在空白处拖拽。</li>
+</ul>
+</li>
+<li><strong>缩放 (Zoom)</strong>:<ul>
+<li><strong>鼠标</strong>: <code>Ctrl/Cmd</code> + 滚轮，或 <code>Ctrl</code> + <code>+</code>/<code>-</code>/<code>=</code> 键。</li>
+<li><strong>触控</strong>: 双指捏合 (Pinch)，支持中心点缩放计算。</li>
+</ul>
+</li>
+<li><strong>视图重置</strong>: 按 <code>Home</code> 键或 <code>Ctrl</code> + <code>0</code>，视图平滑动画回归中心 (<code>scale: 1.2</code>)。</li>
+</ul>
+<p><strong>2.2. 背景与视觉反馈</strong></p>
+<ul>
+<li><strong>网格</strong>: 默认显示点状网格背景 (<code>radial-gradient</code>)。可设置隐藏。</li>
+<li><strong>空状态引导</strong>: 当画布无节点时，显示手绘风格的箭头和提示文字（“输入想法，开启你的画布”），引导用户关注输入框。</li>
+<li><strong>拖拽反馈</strong>: 当用户拖拽文件进入画布区域时，画布边缘显示虚线框高亮 (<code>.drag-over</code>)，提示可释放导入。</li>
+</ul>
+<hr>
+<h3><strong>3. UI 组件规格</strong></h3>
+<p><strong>3.1. 主控制面板 (<code>#ui-layer</code>)</strong></p>
+<ul>
+<li><strong>形态</strong>: 位于左上角的悬浮面板。默认收起为方形图标，鼠标悬浮 (<code>hover</code>) 或 内部聚焦 (<code>focus-within</code>) 时展开。</li>
+<li><strong>移动端适配</strong>: 移动端点击面板区域时强制展开 (<code>.mobile-active</code>)，点击画布区域时自动收起。</li>
+<li><strong>输入区 (<code>textarea</code>)</strong>:<ul>
+<li>支持批量输入。</li>
+<li><strong>解析规则</strong>: 仅按换行符创建多个节点。</li>
+<li><strong>布局规则</strong>: 新节点组放置在现有节点包围盒最右侧 <code>x + 200px</code> 的空白区域起点。</li>
+<li><strong>快捷键</strong>: <code>Ctrl/Cmd + Enter</code> 立即生成节点，<code>Enter</code> 仅换行。</li>
+</ul>
+</li>
+<li><strong>操作堆栈 (<code>.action-stack</code>)</strong>:<ul>
+<li>采用 3D 翻转动画结构。</li>
+<li><strong>正面</strong>: [导出] [导入] [清空]。</li>
+<li><strong>反面 (点击导出后)</strong>: [LINK] [DANGO] [EMBED]。</li>
+<li><strong>自动复位</strong>: 导出面板翻转后，若无操作或点击外部，会自动翻转回正面。</li>
+</ul>
+</li>
+</ul>
+<p><strong>3.2. 顶部状态栏</strong></p>
+<ul>
+<li><strong>Logo</strong>: 根据日期自动显示节日 Emoji（如 🧧春节, 🎃万圣节, 🎄圣诞节等），平时显示 ✨。</li>
+<li><strong>功能区</strong>: 语言切换、主题切换、设置、帮助。</li>
+</ul>
+<p><strong>3.3. 模态框与弹窗</strong></p>
+<ul>
+<li><strong>设置面板 (<code>#settings-modal</code>)</strong>:<ul>
+<li>隐藏网格点。</li>
+<li>Alt 键兼任 Ctrl 功能 (方便单手操作)。</li>
+<li>手写风格 (实验性)。</li>
+</ul>
+</li>
+<li><strong>帮助面板 (<code>#help-modal</code>)</strong>: 列出快捷键，提供 GitHub/反馈/关于 入口。</li>
+<li><strong>关于弹窗 (<code>#about-card</code>)</strong>: 包含版本信息、简介、GitHub Star 引导、博客链接。支持点击遮罩层关闭。</li>
+<li><strong>Toast 通知</strong>: 底部浮出提示。对于“清空”、“导入”等破坏性操作，提供 <strong>[撤销]</strong> 和 <strong>[导出备份]</strong> 按钮作为安全网。</li>
+</ul>
+<hr>
+<h3><strong>4. 画布元素规格</strong></h3>
+<p><strong>4.1. 节点 (Node)</strong></p>
+<ul>
+<li><strong>渲染逻辑</strong>:<ul>
+<li><strong>普通文本</strong>: 支持 Markdown 基础语法（粗体 <code>**</code>、斜体 <code>*</code>）。</li>
+<li><strong>Todo 列表</strong>: 识别 <code>[ ]</code> 或 <code>[x]</code>。渲染为带复选框的列表。<ul>
+<li><strong>交互</strong>: 点击复选框区域 (<code>.todo-checkbox-wrapper</code>) 可直接切换完成状态（修改原始文本），并触发重绘。</li>
+<li><strong>样式</strong>: 包含 Todo 的节点强制左对齐。</li>
+</ul>
+</li>
+<li><strong>链接节点</strong>: 识别 URL。渲染为带下划线的文本，选中节点后右侧悬浮“跳转按钮”。</li>
+<li><strong>图片节点</strong>: 内容完全匹配 Markdown 图片格式 <code>![alt](url)</code> 时渲染为图片。<ul>
+<li><strong>初始尺寸</strong>: 默认小尺寸 (宽 100px，按原始比例计算高度)。</li>
+<li><strong>尺寸切换</strong>: 选中图片节点时显示尺寸按钮，点击按 S(100) → L(200) 循环。</li>
+<li><strong>数据同步</strong>: 尺寸变化仅更新节点已有 <code>w</code>/<code>h</code> 字段。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>编辑</strong>:<ul>
+<li>双击节点或按 <code>Enter</code> 进入编辑模式 (<code>contentEditable</code>)。</li>
+<li>编辑时暂时移除 Markdown 渲染，显示原始文本。</li>
+<li><code>Shift + Enter</code> 换行，<code>Enter</code> 完成编辑，<code>Esc</code> 取消。</li>
+</ul>
+</li>
+<li><strong>手写风格</strong>: 开启设置后，应用 <code>Architects Daughter</code> (英) / <code>LXGW WenKai</code> (中) 字体，并应用不规则边框圆角。</li>
+</ul>
+<p><strong>4.2. 连接线 (Link)</strong></p>
+<ul>
+<li><strong>渲染</strong>: SVG <code>&lt;line&gt;</code> 元素。</li>
+<li><strong>交点计算</strong>: 使用 <code>getEdgeIntersection</code> 算法，确保连线精确指向节点矩形的边缘，而非中心点。</li>
+<li><strong>样式</strong>: 虚化处理 (<code>opacity: 0.35</code>)，箭头为 V 形描边 (<code>path</code> stroke) 而非填充三角形，更具手绘感。</li>
+</ul>
+<hr>
+<h3><strong>5. 核心交互与操作</strong></h3>
+<p><strong>5.1. 历史记录 (Undo/Redo)</strong></p>
+<ul>
+<li><strong>机制</strong>: 基于快照 (Snapshot) 的历史栈。</li>
+<li><strong>容量</strong>: 最大 50 步。</li>
+<li><strong>触发</strong>: 节点增删改、移动、连线、属性变更、选中状态变化均记录历史。</li>
+<li><strong>快捷键</strong>: <code>Ctrl+Z</code> (撤销), <code>Ctrl+Y</code> 或 <code>Ctrl+Shift+Z</code> (重做)。</li>
+</ul>
+<p><strong>5.2. 鼠标/触控操作</strong></p>
+<ul>
+<li><strong>选择</strong>: 单击选中；拖拽框选；<code>Ctrl</code> + 单击 (多选/反选)。</li>
+<li><strong>移动</strong>: 拖拽选中节点。</li>
+<li><strong>克隆</strong>: 按住 <code>Ctrl</code> (或 <code>Alt</code> 若开启设置) 拖拽节点，会在原位置保留副本，拖走新生成的节点（原地克隆逻辑）。</li>
+<li><strong>双击</strong>:<ul>
+<li>节点上双击进入编辑。</li>
+<li>空白区域双击在指针位置创建新节点并自动进入编辑。</li>
+</ul>
+</li>
+<li><strong>触控特化</strong>:<ul>
+<li><strong>轻触</strong>: 选中节点/组。</li>
+<li><strong>拖拽</strong>: 移动节点/平移画布。</li>
+<li><strong>双指捏合</strong>: 缩放画布。</li>
+<li><strong>拟态双击</strong>: 短时间内两次轻触同一节点触发编辑。</li>
+</ul>
+</li>
+</ul>
+<p><strong>5.3. 快捷键体系</strong></p>
+<ul>
+<li><strong>基础</strong>: <code>Del</code> (删除), <code>Space</code> (平移), <code>Home</code> (归位)。</li>
+<li><strong>组合</strong>: <code>Ctrl+G</code> (编组), <code>Ctrl+Shift+G</code> (解组)。</li>
+<li><strong>连线 (<code>Ctrl+L</code>)</strong>: 状态机循环：<ol>
+<li>无 -&gt; 建立连线 (无方向)。</li>
+<li>无方向 -&gt; 指向目标 (Target)。</li>
+<li>指向目标 -&gt; 指向源头 (Source) (若反向选中则逻辑相应调整)。</li>
+<li>指向源头 -&gt; 删除连线。</li>
+</ol>
+</li>
+<li><strong>对齐</strong>:<ul>
+<li><code>Alt</code> + <code>W/A/S/D</code> (顶/左/底/右对齐)。</li>
+<li><code>Alt</code> + <code>H/J</code> (水平/垂直居中)。</li>
+<li><code>Alt</code> + <code>Shift</code> + <code>H/J</code> (水平/垂直分布)。</li>
+<li><strong>智能对齐 (<code>Alt + .</code>)</strong>: 自动识别选中节点的行结构，执行平滑动画 (<code>animateNodesTo</code>) 排列整齐，并保持整体重心位置不变。</li>
+</ul>
+</li>
+<li><strong>聚光灯 (<code>Q</code>)</strong>: 按住 Q 键压暗背景，高亮鼠标位置。</li>
+</ul>
+<hr>
+<h3><strong>6. 数据与输入输出</strong></h3>
+<p><strong>6.1. 数据存储</strong></p>
+<ul>
+<li><strong>本地</strong>: <code>localStorage</code> (<code>cc-canvas-data</code>) 实时自动保存。</li>
+<li><strong>数据结构</strong>: 包含 <code>nodes</code>, <code>groups</code>, <code>links</code> 数组。</li>
+</ul>
+<p><strong>6.2. 导出</strong></p>
+<ul>
+<li><strong>JSON (.dango)</strong>: 完整数据备份。</li>
+<li><strong>链接 (Link)</strong>:<ul>
+<li>使用 <code>LZString</code> 压缩当前数据为 URL Hash。</li>
+<li>复制分享链接到剪贴板。</li>
+</ul>
+</li>
+<li><strong>嵌入代码 (Embed)</strong>:<ul>
+<li>生成 <code>&lt;iframe&gt;</code> 嵌入代码块并复制到剪贴板。</li>
+</ul>
+</li>
+</ul>
+<p><strong>6.3. 导入</strong></p>
+<ul>
+<li>支持点击按钮选择文件，或直接拖拽 <code>.dango</code>/<code>.json</code> 文件到画布。</li>
+<li><strong>URL 加载</strong>: 打开页面时若 URL Hash 存在数据，优先解压加载 Hash 数据（分享预览模式）。</li>
+</ul>
+<hr>
+<h3><strong>7. 特殊模式</strong></h3>
+<p><strong>7.1. 嵌入模式 (Embed Mode)</strong></p>
+<ul>
+<li><strong>触发</strong>: URL 参数 <code>?embed=true</code>。</li>
+<li><strong>UI 变化</strong>: 隐藏左上角主控面板。右下角显示“预览信息”和“打开完整版”按钮。</li>
+<li><strong>行为</strong>: 允许用户交互（拖拽、编辑），但<strong>不会</strong>将修改保存到 <code>localStorage</code>，刷新即恢复原状。适用于博客/文档嵌入演示。</li>
+</ul>
+]]></description>
+            <link>https://dango-canvas.github.io/blog/dango-canvas-specification.html</link>
+            <guid isPermaLink="false">https://dango-canvas.github.io/blog/dango-canvas-specification.html</guid>
+            <pubDate>Sun, 25 Jan 2026 00:00:00 GMT</pubDate>
+        </item>
+    </channel>
+</rss>

@@ -1,0 +1,108 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Archive | Dango Blog</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍡</text></svg>">
+    
+    <!-- 关键 CSS 内联，防止白屏闪烁 (FOUC) -->
+    <style>
+        :root {
+            --bg-color: #f4f7f6;
+            --text-color: #343a40;
+        }
+        body {
+              background-color: var(--bg-color);
+              color: var(--text-color);
+              margin: 0;
+              padding: 0;
+              /* 初始隐藏，配合 CSS 动画平滑显示 */
+              opacity: 0;
+              animation: fadeIn 0.4s ease-out forwards;
+          }
+          @keyframes fadeIn {
+              from { opacity: 0; transform: translateY(10px); }
+              to { opacity: 1; transform: translateY(0); }
+          }
+         .container {
+             max-width: 840px;
+             margin: 0 auto;
+         }
+     </style>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="rss.xml">
+    
+    
+
+    
+</head>
+<body>
+    <div class="container">
+        <header class="site-header">
+            <a href="en.html" class="site-title"><span class="site-logo-icon">🍡</span><span class="site-logo-text">Dango Blog</span></a>
+            
+<nav>
+    <a href="en.html">Home</a>
+    <a href="archive-en.html">Archive</a>
+    <a href="about-en.html">About</a>
+    <a href="archive.html" class="lang-switch-btn" onclick="try{localStorage.setItem('dango_blog_lang','zh')}catch(e){}">中文</a>
+</nav>
+        </header>
+        <main>
+
+<div class="card">
+    <h1>Archive</h1>
+    <p>All articles sorted by publication year.</p>
+    <hr>
+
+    
+    <div class="timeline">
+    
+    
+        
+        
+            <div class="timeline-year">2026</div>
+            
+        
+        <div class="timeline-item">
+            <div class="timeline-meta">11-14</div>
+            <div class="timeline-content">
+                <a href="migrating-to-github-pages-en.html">Dango Domain Expiration &amp; Migration to GitHub Pages Guide</a>
+            </div>
+        </div>
+    
+        
+        
+        <div class="timeline-item">
+            <div class="timeline-meta">07-17</div>
+            <div class="timeline-content">
+                <a href="why-dango-is-secure-en.html">Why Dango is Secure</a>
+            </div>
+        </div>
+    
+    </div>
+    
+</div>
+
+
+</main>
+        <footer class="site-footer">
+            <p>&copy; 2026 🍡 Dango Blog</p>
+            <div class="footer-links">
+                
+                    <a href="terms-en.html">Terms of Service</a>
+                    <span class="separator">·</span>
+                    <a href="privacy-en.html">Privacy Policy</a>
+                    <span class="separator">·</span>
+                    <a href="rss.xml">RSS Feed</a>
+                    <span class="separator">·</span>
+                    <a href="sitemap.xml">Sitemap</a>
+                
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

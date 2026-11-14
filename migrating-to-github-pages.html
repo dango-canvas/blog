@@ -1,0 +1,160 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>团子画板域名到期与迁移至 GitHub Pages 指南 | 团子博客</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍡</text></svg>">
+    
+    <!-- 关键 CSS 内联，防止白屏闪烁 (FOUC) -->
+    <style>
+        :root {
+            --bg-color: #f4f7f6;
+            --text-color: #343a40;
+        }
+        body {
+              background-color: var(--bg-color);
+              color: var(--text-color);
+              margin: 0;
+              padding: 0;
+              /* 初始隐藏，配合 CSS 动画平滑显示 */
+              opacity: 0;
+              animation: fadeIn 0.4s ease-out forwards;
+          }
+          @keyframes fadeIn {
+              from { opacity: 0; transform: translateY(10px); }
+              to { opacity: 1; transform: translateY(0); }
+          }
+         .container {
+             max-width: 840px;
+             margin: 0 auto;
+         }
+     </style>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="rss.xml">
+    
+    
+
+    
+</head>
+<body>
+    <div class="container">
+        <header class="site-header">
+            <a href="index.html" class="site-title"><span class="site-logo-icon">🍡</span><span class="site-logo-text">团子博客</span></a>
+            
+<nav>
+    <a href="index.html">首页</a>
+    <a href="archive.html">归档</a>
+    <a href="about.html">关于</a>
+    <a href="migrating-to-github-pages-en.html" class="lang-switch-btn" onclick="try{localStorage.setItem('dango_blog_lang','en')}catch(e){}">EN</a>
+</nav>
+        </header>
+        <main>
+
+<div class="card">
+    <article class="post">
+        <h1>团子画板域名到期与迁移至 GitHub Pages 指南</h1>
+        <div class="meta">
+            <span>发布于: 2026-11-14</span>
+        </div>
+        
+            <div class="tags">
+                
+                    <a href="tag-公告.html">#公告</a>
+                
+                    <a href="tag-迁移指南.html">#迁移指南</a>
+                
+            </div>
+        
+        <hr>
+        <div class="post-content">
+            <p>团子画板（Dango）自上线以来，一直运行在 <code>dango.ink</code> 域名下。因该域名即将到期维护，为保障服务的持续可用与长期稳定，Dango 现迁移至 GitHub Pages 静态托管，并统一归入 <code>dango-canvas</code> 组织下管理。</p>
+<p>由于 Dango 自设计之初就遵循纯客户端、本地优先（Local-First）且无后端的架构，这次迁移对数据和日常使用的影响极小。本文将针对不同使用场景，详细说明迁移步骤与链接更新方式。</p>
+<hr>
+<h2>1. 新访问地址一览</h2>
+<p>所有相关站点已整合迁移至 GitHub Pages 静态托管：</p>
+<ul>
+<li><strong>在线画板（Web App）</strong>：<a href="https://dango-canvas.github.io/dango/">https://dango-canvas.github.io/dango/</a></li>
+<li><strong>产品落地页（Landing Page）</strong>：<a href="https://dango-canvas.github.io/page/">https://dango-canvas.github.io/page/</a></li>
+<li><strong>官方博客（Blog）</strong>：<a href="https://dango-canvas.github.io/blog/">https://dango-canvas.github.io/blog/</a></li>
+<li><strong>GitHub 组织主页</strong>：<a href="https://github.com/dango-canvas">https://github.com/dango-canvas</a></li>
+</ul>
+<hr>
+<h2>2. 普通网页用户：如何迁移本地画板数据</h2>
+<h3>机制说明</h3>
+<p>Dango 的核心理念是<strong>本地优先</strong>。你的画板草稿与节点数据保存在浏览器本地的 <code>localStorage</code> 中，从未上传到任何云端数据库。</p>
+<p>受现代浏览器的**同源策略（Same-Origin Policy）**安全机制限制，不同的域名之间的本地存储互相隔离。因此，当你首次打开新的 GitHub Pages 域名时，浏览器无法直接读取旧域名下的本地画板，需要进行一次简单的数据交接。</p>
+<h3>迁移步骤（耗时约 10 秒）</h3>
+<ol>
+<li>打开当前的 <code>dango.ink</code> 页面。</li>
+<li>按下快捷键 <code>Ctrl + S</code>（Mac 用户为 <code>Cmd + S</code>），或点击右下角导出菜单中的<strong>导出为 Dango 文件</strong>，将当前的画布保存为 <code>.dango</code> 文件。</li>
+<li>打开新地址：<a href="https://dango-canvas.github.io/dango/">https://dango-canvas.github.io/dango/</a>。</li>
+<li>将刚刚下载的 <code>.dango</code> 文件<strong>直接拖拽</strong>进新网页的画布中（或点击右下角的导入按钮进行加载）。</li>
+<li>数据即刻无损加载完毕，并在新域名下自动建立本地持久化存储。</li>
+</ol>
+<hr>
+<h2>3. 分享链接与嵌入模式用户：如何更新链接</h2>
+<p>如果你此前在 Obsidian、Notion、个人博客中通过 Iframe 嵌入过 Dango 画板，或者收藏了分享链接：</p>
+<h3>机制说明</h3>
+<p>Dango 的分享链接与嵌入代码具有独特的<strong>无状态特性</strong>：画布的全部节点、连线与排版数据，均在客户端通过 <code>lz-string</code> 算法压缩并存放在 URL 的 <code>#</code>（Hash）片段中，完全不依赖中心化服务器解析。</p>
+<h3>更新方法：纯字符串网址替换</h3>
+<p>由于数据全部包含在链接后缀中，你只需要将原有的域名更换为新域名，后续的参数和 Hash 数据完全保持原样即可继续正常渲染。</p>
+<h4>① 普通分享链接</h4>
+<ul>
+<li>旧链接格式：<pre><code class="language-text">https://dango.ink/#NoJgNMwAxgRAVPQPBuEN9wR2q...
+</code></pre>
+</li>
+<li>替换为新链接：<pre><code class="language-text">https://dango-canvas.github.io/dango/#NoJgNMwAxgRAVPQPBuEN9wR2q...
+</code></pre>
+</li>
+</ul>
+<h4>② Iframe 嵌入代码（Notion / Obsidian / 博客等）</h4>
+<ul>
+<li>旧嵌入代码：<pre><code class="language-html">&lt;iframe src=&quot;https://dango.ink/?embed=true#NoJgNMwAxg...&quot; style=&quot;width: 100%; height: 500px; border: none; border-radius: 12px;&quot; allow=&quot;clipboard-write&quot;&gt;&lt;/iframe&gt;
+</code></pre>
+</li>
+<li>只需将 <code>src</code> 中的网址替换为新地址：<pre><code class="language-html">&lt;iframe src=&quot;https://dango-canvas.github.io/dango/?embed=true#NoJgNMwAxg...&quot; style=&quot;width: 100%; height: 500px; border: none; border-radius: 12px;&quot; allow=&quot;clipboard-write&quot;&gt;&lt;/iframe&gt;
+</code></pre>
+</li>
+</ul>
+<hr>
+<h2>4. 浏览器扩展与离线单文件分发</h2>
+<ul>
+<li><strong>Firefox 浏览器扩展</strong>：后续版本将更新默认打开的 Web 目标地址，已安装用户可继续正常使用离线能力。</li>
+<li><strong>单文件版本（Single-file Distribution）</strong>：如果你直接使用的是从 Release 下载的 <code>dango.html</code> 单文件离线运行，则完全不受此次域名迁移影响。</li>
+</ul>
+<hr>
+<h2>5. 再次重申：安全与隐私承诺</h2>
+<p>迁移到 GitHub Pages 仅改变了静态文件的托管分发网络：</p>
+<ol>
+<li><strong>零后端</strong>：仍然没有后端服务与动态运行时。</li>
+<li><strong>零数据上传</strong>：所有渲染、压缩、解析均在你的设备 CPU/内存中执行。</li>
+<li><strong>开源透明</strong>：构建流程已通过 GitHub Actions 自动化公开，确保交付产物与源代码完全一致。</li>
+</ol>
+<p>感谢大家对 Dango 的支持！如有任何疑问或反馈，欢迎在 <a href="https://github.com/dango-canvas/dango/issues">GitHub Issues</a> 与我们交流。</p>
+
+        </div>
+    </article>
+</div>
+
+
+</main>
+        <footer class="site-footer">
+            <p>&copy; 2026 🍡 团子博客</p>
+            <div class="footer-links">
+                
+                    <a href="terms.html">服务条款</a>
+                    <span class="separator">·</span>
+                    <a href="privacy.html">隐私声明</a>
+                    <span class="separator">·</span>
+                    <a href="rss.xml">RSS 订阅</a>
+                    <span class="separator">·</span>
+                    <a href="sitemap.xml">站点地图</a>
+                
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

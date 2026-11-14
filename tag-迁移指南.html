@@ -1,0 +1,85 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>标签: 迁移指南 | 团子博客</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍡</text></svg>">
+    
+    <!-- 关键 CSS 内联，防止白屏闪烁 (FOUC) -->
+    <style>
+        :root {
+            --bg-color: #f4f7f6;
+            --text-color: #343a40;
+        }
+        body {
+              background-color: var(--bg-color);
+              color: var(--text-color);
+              margin: 0;
+              padding: 0;
+              /* 初始隐藏，配合 CSS 动画平滑显示 */
+              opacity: 0;
+              animation: fadeIn 0.4s ease-out forwards;
+          }
+          @keyframes fadeIn {
+              from { opacity: 0; transform: translateY(10px); }
+              to { opacity: 1; transform: translateY(0); }
+          }
+         .container {
+             max-width: 840px;
+             margin: 0 auto;
+         }
+     </style>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="rss.xml">
+    
+    
+
+    
+</head>
+<body>
+    <div class="container">
+        <header class="site-header">
+            <a href="index.html" class="site-title"><span class="site-logo-icon">🍡</span><span class="site-logo-text">团子博客</span></a>
+            
+<nav>
+    <a href="index.html">首页</a>
+    <a href="archive.html">归档</a>
+    <a href="about.html">关于</a>
+    <a href="en.html" class="lang-switch-btn" onclick="try{localStorage.setItem('dango_blog_lang','en')}catch(e){}">EN</a>
+</nav>
+        </header>
+        <main>
+<div class="card">
+<h1>标签: #迁移指南</h1>
+<hr>
+<ul class="post-list">
+    
+        <li>
+            <a href="migrating-to-github-pages.html">团子画板域名到期与迁移至 GitHub Pages 指南</a>
+            <span class="meta">(2026-11-14)</span>
+        </li>
+    
+</ul>
+</div>
+
+</main>
+        <footer class="site-footer">
+            <p>&copy; 2026 🍡 团子博客</p>
+            <div class="footer-links">
+                
+                    <a href="terms.html">服务条款</a>
+                    <span class="separator">·</span>
+                    <a href="privacy.html">隐私声明</a>
+                    <span class="separator">·</span>
+                    <a href="rss.xml">RSS 订阅</a>
+                    <span class="separator">·</span>
+                    <a href="sitemap.xml">站点地图</a>
+                
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

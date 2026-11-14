@@ -1,0 +1,149 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>团子画板隐私声明 | 团子博客</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍡</text></svg>">
+    
+    <!-- 关键 CSS 内联，防止白屏闪烁 (FOUC) -->
+    <style>
+        :root {
+            --bg-color: #f4f7f6;
+            --text-color: #343a40;
+        }
+        body {
+              background-color: var(--bg-color);
+              color: var(--text-color);
+              margin: 0;
+              padding: 0;
+              /* 初始隐藏，配合 CSS 动画平滑显示 */
+              opacity: 0;
+              animation: fadeIn 0.4s ease-out forwards;
+          }
+          @keyframes fadeIn {
+              from { opacity: 0; transform: translateY(10px); }
+              to { opacity: 1; transform: translateY(0); }
+          }
+         .container {
+             max-width: 840px;
+             margin: 0 auto;
+         }
+     </style>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="rss.xml">
+    
+    
+
+    
+</head>
+<body>
+    <div class="container">
+        <header class="site-header">
+            <a href="index.html" class="site-title"><span class="site-logo-icon">🍡</span><span class="site-logo-text">团子博客</span></a>
+            
+<nav>
+    <a href="index.html">首页</a>
+    <a href="archive.html">归档</a>
+    <a href="about.html">关于</a>
+    <a href="privacy-en.html" class="lang-switch-btn" onclick="try{localStorage.setItem('dango_blog_lang','en')}catch(e){}">EN</a>
+</nav>
+        </header>
+        <main>
+
+<div class="card">
+    <article class="post-content">
+        <h1>团子画板隐私声明</h1>
+<p><strong>生效日期</strong>：2026年9月1日<br><strong>最近更新</strong>：2026年9月9日  </p>
+<p>团子画板（Dango，以下简称“我们”或“本工具”）由个人开发者开源维护。我们始终恪守<strong>本地优先、零隐性收集</strong>与<strong>数据绝对归属用户</strong>的纯粹产品哲学。</p>
+<p>本隐私声明旨在客观、详尽地向您说明本工具的数据运行架构：我们如何处理数据，以及为什么您在使用团子画板时享有极高水准的隐私与安全保障。</p>
+<hr>
+<h3>一、核心架构：纯客户端运行与零服务器存储</h3>
+<ol>
+<li><p><strong>无账户体系、零个人身份信息收集</strong></p>
+<ul>
+<li>团子画板不需要注册，也没有账号系统。我们不收集、不要求、亦无法获取您的姓名、电子邮件地址、电话号码、设备唯一标识符等任何个人身份识别信息。</li>
+</ul>
+</li>
+<li><p><strong>本地优先与无后端数据库</strong></p>
+<ul>
+<li>团子画板是一款纯客户端运行的单页应用。</li>
+<li>您在画板中创建、键入、绘制或组织的<strong>所有节点文字、连线拓扑、思维草稿、编组结构及个性化设置</strong>，均仅保存在您当前设备浏览器的本地存储空间中，或由您手动导出为 <code>.dango</code> 本地离线文件。</li>
+<li><strong>我们没有设立任何用于接收、暂存、解析或持久化用户画板内容的后端服务器与数据库</strong>。您的构想与灵感从未离开过您的设备。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3>二、网络基础设施与第三方服务</h3>
+<ol>
+<li><p><strong>Cloudflare 基础设施与基础网络访问日志</strong></p>
+<ul>
+<li>官方在线站点（如 <code>dango.ink</code> 及 <code>blog.dango.ink</code>）托管部署于 Cloudflare 平台（Cloudflare Pages / CDN）。</li>
+<li>当您的浏览器访问本站下载静态应用资源（HTML、JavaScript、CSS、图标等）时，Cloudflare 作为全球网络基础设施服务商，出于防御网络攻击（如 DDoS 防范）、流量调度、故障排查及保障基础网络安全之合规需要，可能会自动记录标准的 HTTP/HTTPS 网络请求日志。</li>
+<li>此类基础日志通常包括：访问者的公网 IP 地址、浏览器 User-Agent、请求 URL、Referer 来源页面以及访问时间戳。</li>
+<li>此类日志由 Cloudflare 依据其自身的<a href="https://www.cloudflare.com/privacypolicy/">《Cloudflare 隐私政策》</a>进行管理与保护。<strong>开发者既不会亦无法将此类底层网络访问日志与您在本地画板上绘制的任何具体图表或文本内容相关联</strong>。</li>
+</ul>
+</li>
+<li><p><strong>第三方外部网络资源（外链图片与字体）</strong></p>
+<ul>
+<li><strong>外链图片与壁纸</strong>：如果您主动在画板中引用了外部 HTTP/HTTPS 图片 URL（如图片节点或背景底图），您的浏览器将直接向该第三方图片服务器发起请求，该过程遵循该第三方服务商的数据与隐私条款。</li>
+<li><strong>网络字体按需加载</strong>：本应用默认优先调用操作系统本地已有的系统手写字体（如 Windows 上的 <code>Segoe Print</code>，macOS 上的 <code>Chalkboard SE</code>）。在开启特定手写模式时，中文字体（霞鹜文楷）将通过 Google Fonts 提供的公开 CDN 进行按需异步下载。</li>
+<li><strong>完全断网离线支持</strong>：如果您身处对网络隔离有严苛要求的保密环境，您可以直接使用我们的单文件离线发布包（<code>dango.html</code>）或自建 Docker 容器，在完全切断互联网连接的状态下 100% 离线使用。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3>三、数据分享与链接生成的运行原理</h3>
+<p>团子画板提供了便捷的“生成分享链接（LINK / EMBED）”功能：</p>
+<ul>
+<li>该功能基于 <code>LZString</code> 纯客户端算法，将您画板上的数据压缩并完整编码写入 URL 的锚点哈希值（Hash，即 <code>#</code> 之后的部分）。</li>
+<li>根据国际互联网 W3C 标准与 HTTP 协议规范，<strong>URL 中 <code>#</code> 及其后续内容严格仅在用户本地浏览器内部解析，绝不会作为 HTTP 请求的一部分发送给任何 Web 服务器</strong>。</li>
+<li>只有被您显式分享并获得完整 URL（含 Hash）的人，其本地浏览器才能利用内置的解压算法将数据还原渲染。在此过程中，没有任何服务端数据沉淀。</li>
+</ul>
+<hr>
+<h3>四、零广告、零商业追踪与零 Cookie</h3>
+<ul>
+<li><strong>无广告集成</strong>：我们不展示任何第三方商业广告。</li>
+<li><strong>无追踪探针</strong>：我们不在代码中埋设任何商业用户画像追踪 SDK、行为分析探针（如 Google Analytics、百度统计）或社交媒体跟踪像素（如 Meta Pixel）。</li>
+<li><strong>无追踪 Cookie</strong>：本工具不向您的浏览器植入任何用于追踪或营销目的的持久性 HTTP Cookie。</li>
+</ul>
+<hr>
+<h3>五、您对数据的绝对控制权（删除与清除）</h3>
+<p>您对存储在本地设备上的所有画板数据拥有绝对的控制权：</p>
+<ul>
+<li><strong>主动销毁</strong>：您可以通过点击界面上的“清空”按钮（回收站图标）即时抹去本地数据；或随时通过浏览器的“清除网站数据 / 清理缓存”功能，一键彻底销毁 <code>localStorage</code> 中的全部画板记录。</li>
+<li><strong>隐私浏览</strong>：若您在浏览器的“无痕模式 / 隐私窗口（Incognito / Private Browsing）”中使用本工具，所有数据将在您关闭窗口的瞬间由浏览器底层自动物理销毁。</li>
+</ul>
+<hr>
+<h3>六、政策变更与联系反馈</h3>
+<p>我们可能会根据产品功能演进或合规要求适时更新本隐私声明。更新后的文本将发布于官方博客及开源仓库中。</p>
+<p>如果您对本隐私声明有任何疑问、意见或建设性反馈，欢迎通过以下渠道与开发者交流：</p>
+<ul>
+<li><strong>官方博客</strong>：<a href="https://blog.dango.ink">https://blog.dango.ink</a></li>
+<li><strong>GitHub 开源仓库</strong>：<a href="https://github.com/dango-canvas/dango">https://github.com/dango-canvas/dango</a></li>
+</ul>
+
+    </article>
+</div>
+
+
+</main>
+        <footer class="site-footer">
+            <p>&copy; 2026 🍡 团子博客</p>
+            <div class="footer-links">
+                
+                    <a href="terms.html">服务条款</a>
+                    <span class="separator">·</span>
+                    <a href="privacy.html">隐私声明</a>
+                    <span class="separator">·</span>
+                    <a href="rss.xml">RSS 订阅</a>
+                    <span class="separator">·</span>
+                    <a href="sitemap.xml">站点地图</a>
+                
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

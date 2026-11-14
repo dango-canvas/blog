@@ -1,0 +1,160 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dango Domain Expiration &amp; Migration to GitHub Pages Guide | Dango Blog</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍡</text></svg>">
+    
+    <!-- 关键 CSS 内联，防止白屏闪烁 (FOUC) -->
+    <style>
+        :root {
+            --bg-color: #f4f7f6;
+            --text-color: #343a40;
+        }
+        body {
+              background-color: var(--bg-color);
+              color: var(--text-color);
+              margin: 0;
+              padding: 0;
+              /* 初始隐藏，配合 CSS 动画平滑显示 */
+              opacity: 0;
+              animation: fadeIn 0.4s ease-out forwards;
+          }
+          @keyframes fadeIn {
+              from { opacity: 0; transform: translateY(10px); }
+              to { opacity: 1; transform: translateY(0); }
+          }
+         .container {
+             max-width: 840px;
+             margin: 0 auto;
+         }
+     </style>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="rss.xml">
+    
+    
+
+    
+</head>
+<body>
+    <div class="container">
+        <header class="site-header">
+            <a href="en.html" class="site-title"><span class="site-logo-icon">🍡</span><span class="site-logo-text">Dango Blog</span></a>
+            
+<nav>
+    <a href="en.html">Home</a>
+    <a href="archive-en.html">Archive</a>
+    <a href="about-en.html">About</a>
+    <a href="migrating-to-github-pages.html" class="lang-switch-btn" onclick="try{localStorage.setItem('dango_blog_lang','zh')}catch(e){}">中文</a>
+</nav>
+        </header>
+        <main>
+
+<div class="card">
+    <article class="post">
+        <h1>Dango Domain Expiration &amp; Migration to GitHub Pages Guide</h1>
+        <div class="meta">
+            <span>Published on: 2026-11-14</span>
+        </div>
+        
+            <div class="tags">
+                
+                    <a href="tag-Announcement.html">#Announcement</a>
+                
+                    <a href="tag-Migration.html">#Migration</a>
+                
+            </div>
+        
+        <hr>
+        <div class="post-content">
+            <p>Since its inception, Dango Canvas has been served under the <code>dango.ink</code> domain. As this domain is reaching its expiration and maintenance window, Dango is transitioning to GitHub Pages for sustainable hosting under the unified <code>dango-canvas</code> organization.</p>
+<p>Because Dango was architected from day one as a pure client-side, local-first, zero-backend application, the impact of this domain change is minimal. This document outlines the straightforward migration steps for different use cases.</p>
+<hr>
+<h2>1. Updated Site URLs</h2>
+<p>All project sites are now statically hosted on GitHub Pages:</p>
+<ul>
+<li><strong>Web Application</strong>: <a href="https://dango-canvas.github.io/dango/">https://dango-canvas.github.io/dango/</a></li>
+<li><strong>Landing Page</strong>: <a href="https://dango-canvas.github.io/page/">https://dango-canvas.github.io/page/</a></li>
+<li><strong>Official Blog</strong>: <a href="https://dango-canvas.github.io/blog/">https://dango-canvas.github.io/blog/</a></li>
+<li><strong>GitHub Organization</strong>: <a href="https://github.com/dango-canvas">https://github.com/dango-canvas</a></li>
+</ul>
+<hr>
+<h2>2. Standard Web Users: Migrating Your Local Canvas Data</h2>
+<h3>How It Works</h3>
+<p>Dango adheres strictly to a <strong>Local-First</strong> model. Your canvases and nodes are stored exclusively in your browser&#39;s <code>localStorage</code> and never transmitted to remote servers.</p>
+<p>Due to the browser&#39;s <strong>Same-Origin Policy (SOP)</strong>, different domains cannot access each other&#39;s local storage. When you first visit the new GitHub Pages domain, your browser starts with an empty canvas. You simply need to transfer your canvas data once.</p>
+<h3>Migration Steps (Takes ~10 seconds)</h3>
+<ol>
+<li>Open the existing <code>dango.ink</code> web app.</li>
+<li>Press <code>Ctrl + S</code> (<code>Cmd + S</code> on macOS), or open the export menu at the bottom-right and select <strong>Export as Dango File</strong> to save your <code>.dango</code> backup file.</li>
+<li>Open the new site: <a href="https://dango-canvas.github.io/dango/">https://dango-canvas.github.io/dango/</a>.</li>
+<li><strong>Drag and drop</strong> your downloaded <code>.dango</code> file onto the new canvas (or use the import button at the bottom-right).</li>
+<li>Your canvas is instantly loaded and will automatically persist in the new domain&#39;s storage.</li>
+</ol>
+<hr>
+<h2>3. Share Links &amp; Embedded Iframes: Updating URLs</h2>
+<p>If you have embedded Dango in Notion, Obsidian, or your personal website, or saved share links:</p>
+<h3>How It Works</h3>
+<p>Dango&#39;s sharing and embedding mechanism is completely <strong>stateless</strong>. The entire canvas state (nodes, links, layouts) is compressed using <code>lz-string</code> and stored in the URL <code>#</code> (Hash) fragment. No central server is required to resolve or host the content.</p>
+<h3>Solution: Pure String URL Replacement</h3>
+<p>Since all data is embedded in the hash, you only need to swap the origin domain in your link while keeping the parameters and hash intact.</p>
+<h4>① Share Links</h4>
+<ul>
+<li>Old Link:<pre><code class="language-text">https://dango.ink/#NoJgNMwAxgRAVPQPBuEN9wR2q...
+</code></pre>
+</li>
+<li>New Link:<pre><code class="language-text">https://dango-canvas.github.io/dango/#NoJgNMwAxgRAVPQPBuEN9wR2q...
+</code></pre>
+</li>
+</ul>
+<h4>② Embedded Iframe Code (Notion / Obsidian / Blogs)</h4>
+<ul>
+<li>Old Embed Code:<pre><code class="language-html">&lt;iframe src=&quot;https://dango.ink/?embed=true#NoJgNMwAxg...&quot; style=&quot;width: 100%; height: 500px; border: none; border-radius: 12px;&quot; allow=&quot;clipboard-write&quot;&gt;&lt;/iframe&gt;
+</code></pre>
+</li>
+<li>Updated Embed Code:<pre><code class="language-html">&lt;iframe src=&quot;https://dango-canvas.github.io/dango/?embed=true#NoJgNMwAxg...&quot; style=&quot;width: 100%; height: 500px; border: none; border-radius: 12px;&quot; allow=&quot;clipboard-write&quot;&gt;&lt;/iframe&gt;
+</code></pre>
+</li>
+</ul>
+<hr>
+<h2>4. Browser Extensions &amp; Single-File Bundles</h2>
+<ul>
+<li><strong>Firefox Add-on</strong>: A maintenance update will be submitted to redirect to the new Web endpoint. Existing installations will continue working normally offline.</li>
+<li><strong>Single-file Distribution</strong>: If you use the standalone <code>dango.html</code> downloaded from GitHub Releases, you are completely unaffected by this migration.</li>
+</ul>
+<hr>
+<h2>5. Security &amp; Privacy Guarantees</h2>
+<p>Moving to GitHub Pages only changes the static delivery CDN:</p>
+<ol>
+<li><strong>Zero Backend</strong>: No servers or dynamic execution environments.</li>
+<li><strong>Zero Tracking</strong>: Computation, compression, and rendering remain 100% on your device.</li>
+<li><strong>Open &amp; Transparent</strong>: Build steps are executed publicly via GitHub Actions.</li>
+</ol>
+<p>Thank you for using Dango! If you encounter any issues, please feel free to open a ticket on <a href="https://github.com/dango-canvas/dango/issues">GitHub Issues</a>.</p>
+
+        </div>
+    </article>
+</div>
+
+
+</main>
+        <footer class="site-footer">
+            <p>&copy; 2026 🍡 Dango Blog</p>
+            <div class="footer-links">
+                
+                    <a href="terms-en.html">Terms of Service</a>
+                    <span class="separator">·</span>
+                    <a href="privacy-en.html">Privacy Policy</a>
+                    <span class="separator">·</span>
+                    <a href="rss.xml">RSS Feed</a>
+                    <span class="separator">·</span>
+                    <a href="sitemap.xml">Sitemap</a>
+                
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
