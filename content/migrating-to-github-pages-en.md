@@ -1,7 +1,5 @@
 #Announcement #Migration
 
-# Dango Domain Expiration & Migration to GitHub Pages Guide
-
 Since its inception, Dango Canvas has been served under the `dango.ink` domain. As this domain is reaching its expiration and maintenance window, Dango is transitioning to GitHub Pages for sustainable hosting under the unified `dango-canvas` organization.
 
 Because Dango was architected from day one as a pure client-side, local-first, zero-backend application, the impact of this domain change is minimal. This document outlines the straightforward migration steps for different use cases.
@@ -12,9 +10,9 @@ Because Dango was architected from day one as a pure client-side, local-first, z
 
 All project sites are now statically hosted on GitHub Pages:
 
-*   **Web Application**: [https://dango-canvas.github.io/](https://dango-canvas.github.io/) (or [https://dango-canvas.github.io/dango/](https://dango-canvas.github.io/dango/))
+*   **Web Application**: [https://dango-canvas.github.io/dango/](https://dango-canvas.github.io/dango/)
+*   **Landing Page**: [https://dango-canvas.github.io/page/](https://dango-canvas.github.io/page/)
 *   **Official Blog**: [https://dango-canvas.github.io/blog/](https://dango-canvas.github.io/blog/)
-*   **Landing Page**: [https://dango-canvas.github.io/dango-landing-page/](https://dango-canvas.github.io/dango-landing-page/)
 *   **GitHub Organization**: [https://github.com/dango-canvas](https://github.com/dango-canvas)
 
 ---
@@ -29,7 +27,7 @@ Due to the browser's **Same-Origin Policy (SOP)**, different domains cannot acce
 ### Migration Steps (Takes ~10 seconds)
 1. Open the existing `dango.ink` web app.
 2. Press `Ctrl + S` (`Cmd + S` on macOS), or open the export menu at the bottom-right and select **Export as Dango File** to save your `.dango` backup file.
-3. Open the new site: [https://dango-canvas.github.io/](https://dango-canvas.github.io/).
+3. Open the new site: [https://dango-canvas.github.io/dango/](https://dango-canvas.github.io/dango/).
 4. **Drag and drop** your downloaded `.dango` file onto the new canvas (or use the import button at the bottom-right).
 5. Your canvas is instantly loaded and will automatically persist in the new domain's storage.
 
@@ -52,7 +50,7 @@ Since all data is embedded in the hash, you only need to swap the origin domain 
     ```
 *   New Link:
     ```text
-    https://dango-canvas.github.io/#NoJgNMwAxgRAVPQPBuEN9wR2q...
+    https://dango-canvas.github.io/dango/#NoJgNMwAxgRAVPQPBuEN9wR2q...
     ```
 
 #### ② Embedded Iframe Code (Notion / Obsidian / Blogs)
@@ -62,7 +60,7 @@ Since all data is embedded in the hash, you only need to swap the origin domain 
     ```
 *   Updated Embed Code:
     ```html
-    <iframe src="https://dango-canvas.github.io/?embed=true#NoJgNMwAxg..." style="width: 100%; height: 500px; border: none; border-radius: 12px;" allow="clipboard-write"></iframe>
+    <iframe src="https://dango-canvas.github.io/dango/?embed=true#NoJgNMwAxg..." style="width: 100%; height: 500px; border: none; border-radius: 12px;" allow="clipboard-write"></iframe>
     ```
 
 ---

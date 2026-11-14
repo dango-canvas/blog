@@ -3,7 +3,7 @@
 [site]
 title = "团子博客"
 titleEn = "Dango Blog"
-baseURL = "https://blog.dango.ink" # 请务必替换成你未来的域名
+baseURL = "https://dango-canvas.github.io/blog"
 description = "这里会记录团子画板的开发日志，以及一些使用团子画板理清思路的文章。"
 descriptionEn = "Development logs of Dango Canvas and thoughts on visual thinking."
 

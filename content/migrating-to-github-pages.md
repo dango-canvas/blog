@@ -1,7 +1,5 @@
 #公告 #迁移指南
 
-# Dango 域名到期与迁移至 GitHub Pages 指南
-
 团子画板（Dango）自上线以来，一直运行在 `dango.ink` 域名下。因该域名即将到期维护，为保障服务的持续可用与长期稳定，Dango 现迁移至 GitHub Pages 静态托管，并统一归入 `dango-canvas` 组织下管理。
 
 由于 Dango 自设计之初就遵循纯客户端、本地优先（Local-First）且无后端的架构，这次迁移对数据和日常使用的影响极小。本文将针对不同使用场景，详细说明迁移步骤与链接更新方式。
@@ -12,10 +10,10 @@
 
 所有相关站点已整合迁移至 GitHub Pages 静态托管：
 
-*   **在线画板（Web App）**：[https://dango-canvas.github.io/](https://dango-canvas.github.io/) (或 [https://dango-canvas.github.io/dango/](https://dango-canvas.github.io/dango/))
+*   **在线画板（Web App）**：[https://dango-canvas.github.io/dango/](https://dango-canvas.github.io/dango/)
+*   **产品落地页（Landing Page）**：[https://dango-canvas.github.io/page/](https://dango-canvas.github.io/page/)
 *   **官方博客（Blog）**：[https://dango-canvas.github.io/blog/](https://dango-canvas.github.io/blog/)
-*   **产品落地页（Landing Page）**：[https://dango-canvas.github.io/dango-landing-page/](https://dango-canvas.github.io/dango-landing-page/)
-*   **GitHub 组织仓库**：[https://github.com/dango-canvas](https://github.com/dango-canvas)
+*   **GitHub 组织主页**：[https://github.com/dango-canvas](https://github.com/dango-canvas)
 
 ---
 
@@ -29,7 +27,7 @@ Dango 的核心理念是**本地优先**。你的画板草稿与节点数据保�
 ### 迁移步骤（耗时约 10 秒）
 1. 打开当前的 `dango.ink` 页面。
 2. 按下快捷键 `Ctrl + S`（Mac 用户为 `Cmd + S`），或点击右下角导出菜单中的**导出为 Dango 文件**，将当前的画布保存为 `.dango` 文件。
-3. 打开新地址：[https://dango-canvas.github.io/](https://dango-canvas.github.io/)。
+3. 打开新地址：[https://dango-canvas.github.io/dango/](https://dango-canvas.github.io/dango/)。
 4. 将刚刚下载的 `.dango` 文件**直接拖拽**进新网页的画布中（或点击右下角的导入按钮进行加载）。
 5. 数据即刻无损加载完毕，并在新域名下自动建立本地持久化存储。
 
@@ -52,7 +50,7 @@ Dango 的分享链接与嵌入代码具有独特的**无状态特性**：画布�
     ```
 *   替换为新链接：
     ```text
-    https://dango-canvas.github.io/#NoJgNMwAxgRAVPQPBuEN9wR2q...
+    https://dango-canvas.github.io/dango/#NoJgNMwAxgRAVPQPBuEN9wR2q...
     ```
 
 #### ② Iframe 嵌入代码（Notion / Obsidian / 博客等）
@@ -62,7 +60,7 @@ Dango 的分享链接与嵌入代码具有独特的**无状态特性**：画布�
     ```
 *   只需将 `src` 中的网址替换为新地址：
     ```html
-    <iframe src="https://dango-canvas.github.io/?embed=true#NoJgNMwAxg..." style="width: 100%; height: 500px; border: none; border-radius: 12px;" allow="clipboard-write"></iframe>
+    <iframe src="https://dango-canvas.github.io/dango/?embed=true#NoJgNMwAxg..." style="width: 100%; height: 500px; border: none; border-radius: 12px;" allow="clipboard-write"></iframe>
     ```
 
 ---
