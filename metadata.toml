@@ -24,3 +24,15 @@ file = "why-dango-is-secure-en.md"
 date = 2026-07-17
 title = "Why Dango is Secure"
 slug = "why-dango-is-secure-en"
+
+[[post]]
+file = "migrating-to-github-pages.md"
+date = 2026-11-14
+title = "团子画板域名到期与迁移至 GitHub Pages 指南"
+slug = "migrating-to-github-pages"
+
+[[post]]
+file = "migrating-to-github-pages-en.md"
+date = 2026-11-14
+title = "Dango Domain Expiration & Migration to GitHub Pages Guide"
+slug = "migrating-to-github-pages-en"
